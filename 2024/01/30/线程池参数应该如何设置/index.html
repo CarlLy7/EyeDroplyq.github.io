@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>线程池参数应该如何设置 | 我的博客</title>
+  <meta name="keywords" content=" 线程池参数应该如何设置 ">
+  <meta name="description" content="线程池参数应该如何设置 | 我的博客">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="description" content="线程池参数应该如何设置前提说明：​	今天为啥要写这篇文章呢，主要是我面试的时候被问到了这样一个问题： ​	 	面试官： “你在工作中用到过池化技术吗？” ​		 我：“用到过，用到过线程池” ​		 面试官：“那你说一下，在实际的项目中你是如何设置线程池的各个参数的大小的？” ​		我：“如果是CPU密集型任务就把线程数配置为N+1，核数+1；如果是IO密集型任务就配置为2N” ​	 	面试官：“">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线程池参数应该如何设置">
+<meta property="og:url" content="http://eyedroplyq.github.io/2024/01/30/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8F%82%E6%95%B0%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE/index.html">
+<meta property="og:site_name" content="我的博客">
+<meta property="og:description" content="线程池参数应该如何设置前提说明：​	今天为啥要写这篇文章呢，主要是我面试的时候被问到了这样一个问题： ​	 	面试官： “你在工作中用到过池化技术吗？” ​		 我：“用到过，用到过线程池” ​		 面试官：“那你说一下，在实际的项目中你是如何设置线程池的各个参数的大小的？” ​		我：“如果是CPU密集型任务就把线程数配置为N+1，核数+1；如果是IO密集型任务就配置为2N” ​	 	面试官：“">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-30T11:41:48.000Z">
+<meta property="article:modified_time" content="2024-01-30T11:48:13.714Z">
+<meta property="article:author" content="Carl-LYQ">
+<meta property="article:tag" content="线程池参数应该如何设置">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="icon" href="/img/avatar.jpg">
+
+<link href="/css/style.css?v=1.1.0" rel="stylesheet">
+
+<link href="/css/hl_theme/atom-light.css?v=1.1.0" rel="stylesheet">
+
+<link href="//cdn.jsdelivr.net/npm/animate.css@4.1.0/animate.min.css" rel="stylesheet">
+
+<script src="//cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<script src="/js/titleTip.js?v=1.1.0" ></script>
+
+<script src="//cdn.jsdelivr.net/npm/highlightjs@9.16.2/highlight.pack.min.js"></script>
+<script>
+    hljs.initHighlightingOnLoad();
+</script>
+
+<script src="//cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js"></script>
+
+
+
+<script src="//cdn.jsdelivr.net/npm/jquery.cookie@1.4.1/jquery.cookie.min.js" ></script>
+
+<script src="/js/iconfont.js?v=1.1.0" ></script>
+
+</head>
+<div style="display: none">
+  <input class="theme_disqus_on" value="false">
+  <input class="theme_preload_comment" value="">
+  <input class="theme_blog_path" value="">
+  <input id="theme_shortcut" value="true" />
+  <input id="theme_highlight_on" value="true" />
+  <input id="theme_code_copy" value="true" />
+</div>
+
+
+
+<body>
+<aside class="nav">
+    <div class="nav-left">
+        <a href="/"
+   class="avatar_target">
+    <img class="avatar"
+         src="/img/avatar.jpg"/>
+</a>
+<div class="author">
+    <span>Carl-LYQ</span>
+</div>
+
+<div class="icon">
+    
+        
+            <a title="rss"
+               href="/atom.xml"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-rss"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="github"
+               href="https://github.com/eyedroplyq"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-github"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="email"
+               href="mailto:1525761478@qq.com"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-email"></use>
+                    </svg>
+                
+            </a>
+        
+    
+        
+            <a title="qq"
+               href="http://wpa.qq.com/msgrd?v=3&uin=1525761478&site=qq&menu=yes"
+               target="_blank">
+                
+                    <svg class="iconfont-svg" aria-hidden="true">
+                        <use xlink:href="#icon-qq"></use>
+                    </svg>
+                
+            </a>
+        
+    
+</div>
+
+
+
+
+
+<ul>
+    <li>
+        <div class="all active" data-rel="全部文章">全部文章
+            
+                <small>(40)</small>
+            
+        </div>
+    </li>
+    
+        
+            
+                
+    <li>
+        <div data-rel="系统设计">
+            
+            系统设计
+            <small>(12)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="中间件">
+            
+            中间件
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="系统设计常识与原则和系统性能优化原则">
+            
+            系统设计常识与原则和系统性能优化原则
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="网络通信">
+            
+            网络通信
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="分布式系统">
+            
+            分布式系统
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="后端">
+            
+            后端
+            <small>(9)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="数据库">
+            
+            数据库
+            <small>(3)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="容器化云平台">
+            
+            容器化云平台
+            <small>(1)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+        
+            
+                
+    <li>
+        <div data-rel="面试题">
+            
+            面试题
+            <small>(9)</small>
+        </div>
+        
+    </li>
+
+            
+        
+    
+</ul>
+<div class="left-bottom">
+    <div class="menus">
+        
+            
+            
+            
+    </div>
+    <div>
+        
+            <a class="about  hasFriend  site_url"
+               
+               href="/about">关于</a>
+        
+        <a style="width: 50%"
+                
+                                           class="friends">友链</a>
+        
+    </div>
+</div>
+<input type="hidden" id="yelog_site_posts_number" value="40">
+
+<div style="display: none">
+    <span id="busuanzi_value_site_uv"></span>
+    <span id="busuanzi_value_site_pv"></span>
+</div>
+
+    </div>
+    <div class="nav-right">
+        <div class="friends-area">
+    <div class="friends-title">
+        友情链接
+        <i class="iconfont icon-left"></i>
+    </div>
+    <div class="friends-content">
+        <ul>
+            
+            <li><a target="_blank" href="/null">小琦</a></li>
+            
+        </ul>
+    </div>
+</div>
+        <div class="title-list">
+    <div class="right-top">
+        <div id="default-panel">
+            <i class="iconfont icon-search" data-title="搜索 快捷键 i"></i>
+            <div class="right-title">全部文章</div>
+            <i class="iconfont icon-file-tree" data-title="切换到大纲视图 快捷键 w"></i>
+        </div>
+        <div id="search-panel">
+            <i class="iconfont icon-left" data-title="返回"></i>
+            <input id="local-search-input" autocomplete="off"/>
+            <label class="border-line" for="input"></label>
+            <i class="iconfont icon-case-sensitive" data-title="大小写敏感"></i>
+            <i class="iconfont icon-tag" data-title="标签"></i>
+        </div>
+        <div id="outline-panel" style="display: none">
+            <div class="right-title">大纲</div>
+            <i class="iconfont icon-list" data-title="切换到文章列表"></i>
+        </div>
+    </div>
+
+    <div class="tags-list">
+    <input id="tag-search" />
+    <div class="tag-wrapper">
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>乘车系统</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>订单业务中的重要问题：超卖问题的解决方案</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>短链系统的设计方案</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式事务解决方案</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>分布式锁</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>负载均衡常见算法</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>工作中JUC的使用和学习</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>计算机网络知识沉淀总结</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>幂等性常用的解决方案</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>秒杀系统的设计方案</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>配置中心的设计</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>如何对敏感数据进行模糊查询</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>设计模式汇总</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>统计网站UV设计方案</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>稳定的数据迁移方案</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>系统设计常识与原则和系统性能优化原则</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>线程池参数应该如何设置</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>线上故障分析</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>站内消息系统设计</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>CDN</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>DockerFile总结</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>drools规则引擎</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Feed流/信息流 系统设计方案</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>go方法中的值接收者和方法接收者</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Go语言深度理解</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Java并发面试知识</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Java数据类型面试题</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Kafka</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MVCC多版本并发控制</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>mysql大数据量插入性能优化方案</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MySQL的主从延迟问题</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>MySQL行锁、间隙锁、表锁的简单规则</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Netty</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>redis作为分布式锁中常见的问题</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RPC框架</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>RPC系统设计</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Spring 如何解决循环依赖？</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>SQL优化手段</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>Zookeeper原理讲解</a>
+            </li>
+        
+    </div>
+
+</div>
+
+    
+    <nav id="title-list-nav">
+        
+        
+        <a id="top" class="全部文章 系统设计 "
+           href="/2017/01/23/%E4%B9%98%E8%BD%A6%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="乘车系统"
+           data-author="" >
+            <span class="post-title" title="乘车系统的设计">乘车系统的设计</span>
+            <span class="post-date" title="2017-01-23 11:41:48">2017/01/23</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2024/01/30/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8F%82%E6%95%B0%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE/"
+           data-tag="线程池参数应该如何设置"
+           data-author="" >
+            <span class="post-title" title="线程池参数应该如何设置">线程池参数应该如何设置</span>
+            <span class="post-date" title="2024-01-30 19:41:48">2024/01/30</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/12/12/%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81/"
+           data-tag="分布式锁"
+           data-author="" >
+            <span class="post-title" title="分布式锁">分布式锁</span>
+            <span class="post-date" title="2023-12-12 11:41:48">2023/12/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/12/12/%E8%AE%A2%E5%8D%95%E4%B8%9A%E5%8A%A1%E4%B8%AD%E7%9A%84%E9%87%8D%E8%A6%81%E9%97%AE%E9%A2%98%EF%BC%9A%E8%B6%85%E5%8D%96%E9%97%AE%E9%A2%98%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"
+           data-tag="订单业务中的重要问题：超卖问题的解决方案"
+           data-author="" >
+            <span class="post-title" title="订单业务中的重要问题：超卖问题的解决方案">订单业务中的重要问题：超卖问题的解决方案</span>
+            <span class="post-date" title="2023-12-12 11:00:00">2023/12/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/12/12/%E5%B9%82%E7%AD%89%E6%80%A7%E5%B8%B8%E7%94%A8%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"
+           data-tag="幂等性常用的解决方案"
+           data-author="" >
+            <span class="post-title" title="幂等性常用的解决方案">幂等性常用的解决方案</span>
+            <span class="post-date" title="2023-12-12 10:00:00">2023/12/12</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
+           href="/2023/12/01/ConcurrentHashMap%20%E4%B8%BA%E4%BD%95%E4%B8%8D%E8%83%BD%E6%8F%92%E5%85%A5%20null%EF%BC%9FHashMap%20%E4%B8%BA%E4%BD%95%E5%8F%AF%E4%BB%A5/"
+           data-tag="ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？"
+           data-author="" >
+            <span class="post-title" title="ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？">ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
+           href="/2023/12/01/CDN/"
+           data-tag="CDN"
+           data-author="" >
+            <span class="post-title" title="CDN">CDN</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 中间件 "
+           href="/2023/12/01/Kafka/"
+           data-tag="Kafka"
+           data-author="" >
+            <span class="post-title" title="Kafka">Kafka</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
+           href="/2023/12/01/Java%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="Java数据类型面试题"
+           data-author="" >
+            <span class="post-title" title="Java数据类型面试题">Java数据类型面试题</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
+           href="/2023/12/01/Java%E5%B9%B6%E5%8F%91/"
+           data-tag="Java并发面试知识"
+           data-author="" >
+            <span class="post-title" title="Java并发面试知识">Java并发面试知识</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
+           href="/2023/12/01/MySQL%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F%E9%97%AE%E9%A2%98/"
+           data-tag="MySQL的主从延迟问题"
+           data-author="" >
+            <span class="post-title" title="MySQL的主从延迟问题">MySQL的主从延迟问题</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 容器化云平台 "
+           href="/2023/12/01/DockerFile/"
+           data-tag="DockerFile总结"
+           data-author="" >
+            <span class="post-title" title="DockerFile总结">DockerFile总结</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
+           href="/2023/12/01/MySQL%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84MVCC%E6%9C%BA%E5%88%B6/"
+           data-tag="MVCC多版本并发控制"
+           data-author="" >
+            <span class="post-title" title="MVCC多版本并发控制">MVCC多版本并发控制</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
+           href="/2023/12/01/MySQL%E8%A1%8C%E9%94%81%E3%80%81%E9%97%B4%E9%9A%99%E9%94%81%E3%80%81%E8%A1%A8%E9%94%81%E7%9A%84%E7%AE%80%E5%8D%95%E8%A7%84%E5%88%99/"
+           data-tag="MySQL行锁、间隙锁、表锁的简单规则"
+           data-author="" >
+            <span class="post-title" title="MySQL行锁、间隙锁、表锁的简单规则">MySQL行锁、间隙锁、表锁的简单规则</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 网络通信 "
+           href="/2023/12/01/RPC%E6%A1%86%E6%9E%B6/"
+           data-tag="RPC框架"
+           data-author="" >
+            <span class="post-title" title="RPC框架">RPC框架</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 网络通信 "
+           href="/2023/12/01/Netty/"
+           data-tag="Netty"
+           data-author="" >
+            <span class="post-title" title="Netty">Netty</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 "
+           href="/2023/12/01/SQL%E4%BC%98%E5%8C%96%E6%89%8B%E6%AE%B5/"
+           data-tag="SQL优化手段"
+           data-author="" >
+            <span class="post-title" title="SQL优化手段">SQL优化手段</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
+           href="/2023/12/01/Spring%20%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/"
+           data-tag="Spring 如何解决循环依赖？"
+           data-author="" >
+            <span class="post-title" title="Spring 如何解决循环依赖？">Spring 如何解决循环依赖？</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/12/01/RPC%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="RPC系统设计"
+           data-author="" >
+            <span class="post-title" title="RPC系统设计">RPC系统设计</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/12/01/drools%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E/"
+           data-tag="drools规则引擎"
+           data-author="" >
+            <span class="post-title" title="drools规则引擎">drools规则引擎</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/12/01/feed%E6%B5%81%EF%BC%88%E4%BF%A1%E6%81%AF%E6%B5%81%EF%BC%89%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/"
+           data-tag="Feed流/信息流 系统设计方案"
+           data-author="" >
+            <span class="post-title" title="Feed流/信息流 系统设计方案">Feed流/信息流 系统设计方案</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/12/01/go%E8%AF%AD%E8%A8%80%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3/"
+           data-tag="Go语言深度理解"
+           data-author="" >
+            <span class="post-title" title="Go语言深度理解">Go语言深度理解</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/12/01/go%E6%96%B9%E6%B3%95%E4%B8%AD%E7%9A%84%E5%80%BC%E6%8E%A5%E6%94%B6%E8%80%85%E5%92%8C%E6%96%B9%E6%B3%95%E6%8E%A5%E6%94%B6%E8%80%85/"
+           data-tag="go方法中的值接收者和方法接收者"
+           data-author="" >
+            <span class="post-title" title="go方法中的值接收者和方法接收者">go方法中的值接收者和方法接收者</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 "
+           href="/2023/12/01/mysql%E9%AB%98%E6%80%A7%E8%83%BD%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E4%BC%98%E5%8C%96/"
+           data-tag="mysql大数据量插入性能优化方案"
+           data-author="" >
+            <span class="post-title" title="mysql大数据量插入性能优化方案">mysql大数据量插入性能优化方案</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
+           href="/2023/12/01/redis%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81%E9%97%AE%E9%A2%98/"
+           data-tag="redis作为分布式锁中常见的问题"
+           data-author="" >
+            <span class="post-title" title="redis作为分布式锁中常见的问题">redis作为分布式锁中常见的问题</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 分布式系统 "
+           href="/2023/12/01/zookeeper%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%EF%BC%88%E8%87%AA%E5%88%9B%EF%BC%89/"
+           data-tag="Zookeeper原理讲解"
+           data-author="" >
+            <span class="post-title" title="Zookeeper原理讲解">Zookeeper原理讲解</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/12/01/%E5%88%86%E5%B8%83%E5%BC%8F%E4%BA%8B%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"
+           data-tag="分布式事务解决方案"
+           data-author="" >
+            <span class="post-title" title="分布式事务解决方案">分布式事务解决方案</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 数据库 "
+           href="/2023/12/01/%E5%A6%82%E4%BD%95%E5%AF%B9%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E6%A8%A1%E7%B3%8A%E6%9F%A5%E8%AF%A2/"
+           data-tag="如何对敏感数据进行模糊查询"
+           data-author="" >
+            <span class="post-title" title="如何对敏感数据进行模糊查询">如何对敏感数据进行模糊查询</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/12/01/%E5%B7%A5%E4%BD%9C%E4%B8%ADJUC%E7%9A%84%E4%BD%BF%E7%94%A8%E5%92%8C%E5%AD%A6%E4%B9%A0/"
+           data-tag="工作中JUC的使用和学习"
+           data-author="" >
+            <span class="post-title" title="工作中JUC的使用和学习">工作中JUC的使用和学习</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计常识与原则和系统性能优化原则 "
+           href="/2023/12/01/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%B8%B8%E8%AF%86%E4%B8%8E%E5%8E%9F%E5%88%99%E5%92%8C%E7%B3%BB%E7%BB%9F%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%8E%9F%E5%88%99/"
+           data-tag="系统设计常识与原则和系统性能优化原则"
+           data-author="" >
+            <span class="post-title" title="系统设计常识与原则和系统性能优化原则">系统设计常识与原则和系统性能优化原则</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/12/01/%E7%AB%99%E5%86%85%E6%B6%88%E6%81%AF%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"
+           data-tag="站内消息系统设计"
+           data-author="" >
+            <span class="post-title" title="站内消息系统设计">站内消息系统设计</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/12/01/%E7%BA%BF%E4%B8%8A%E6%95%85%E9%9A%9C%E5%88%86%E6%9E%90/"
+           data-tag="线上故障分析"
+           data-author="" >
+            <span class="post-title" title="线上故障分析">线上故障分析</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 网络通信 "
+           href="/2023/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E6%B2%89%E6%B7%80%E6%80%BB%E7%BB%93/"
+           data-tag="计算机网络知识沉淀总结"
+           data-author="" >
+            <span class="post-title" title="计算机网络知识沉淀总结">计算机网络知识沉淀总结</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/12/01/%E7%BB%9F%E8%AE%A1%E7%BD%91%E7%AB%99UV%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/"
+           data-tag="统计网站UV设计方案"
+           data-author="" >
+            <span class="post-title" title="统计网站UV设计方案">统计网站UV设计方案</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/12/01/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E7%9A%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="配置中心的设计"
+           data-author="" >
+            <span class="post-title" title="配置中心的设计">配置中心的设计</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/12/01/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95/"
+           data-tag="负载均衡常见算法"
+           data-author="" >
+            <span class="post-title" title="负载均衡常见算法">负载均衡常见算法</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/12/01/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F%E6%B1%87%E6%80%BB/"
+           data-tag="设计模式汇总"
+           data-author="" >
+            <span class="post-title" title="设计模式汇总">设计模式汇总</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/11/26/%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/"
+           data-tag="秒杀系统的设计方案"
+           data-author="" >
+            <span class="post-title" title="秒杀系统的设计方案">秒杀系统的设计方案</span>
+            <span class="post-date" title="2023-11-26 13:41:48">2023/11/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/11/26/%E7%A8%B3%E5%AE%9A%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB%E6%96%B9%E6%A1%88/"
+           data-tag="稳定的数据迁移方案"
+           data-author="" >
+            <span class="post-title" title="稳定的数据迁移方案">稳定的数据迁移方案</span>
+            <span class="post-date" title="2023-11-26 11:41:48">2023/11/26</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/11/26/%E7%9F%AD%E9%93%BE%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/"
+           data-tag="短链系统的设计方案"
+           data-author="" >
+            <span class="post-title" title="短链系统的设计方案">短链系统的设计方案</span>
+            <span class="post-date" title="2023-11-26 11:41:48">2023/11/26</span>
+        </a>
+        
+        <div id="no-item-tips">
+
+        </div>
+    </nav>
+    <div id="outline-list">
+    </div>
+</div>
+
+    </div>
+    <div class="hide-list">
+        <div class="semicircle" data-title="切换全屏 快捷键 s">
+            <div class="brackets first"><</div>
+            <div class="brackets">&gt;</div>
+        </div>
+    </div>
+</aside>
+<div id="post">
+    <div class="pjax">
+        <article id="post-线程池参数应该如何设置" class="article article-type-post" itemscope itemprop="blogPost">
+    
+        <h1 class="article-title">线程池参数应该如何设置</h1>
+    
+    <div class="article-meta">
+        
+        
+        
+        <span class="book">
+            <i class="iconfont icon-category"></i>
+            
+            
+            <a  data-rel="后端">后端</a>
+            
+        </span>
+        
+        
+        <span class="tag">
+            <i class="iconfont icon-tag"></i>
+            
+            <a class="color2">线程池参数应该如何设置</a>
+            
+        </span>
+        
+    </div>
+    <div class="article-meta">
+        
+            发布时间 : <time class="date" title='最后更新: 2024-01-30 19:48:13'>2024-01-30 19:41</time>
+        
+    </div>
+    <div class="article-meta">
+        
+        
+        <span id="busuanzi_container_page_pv">
+            阅读 :<span id="busuanzi_value_page_pv">
+                <span class="count-comment">
+                    <span class="spinner">
+                      <div class="cube1"></div>
+                      <div class="cube2"></div>
+                    </span>
+                </span>
+            </span>
+        </span>
+        
+        
+    </div>
+    
+    <div class="toc-ref">
+    
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8F%82%E6%95%B0%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE"><span class="toc-text">线程池参数应该如何设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E6%8F%90%E8%AF%B4%E6%98%8E%EF%BC%9A"><span class="toc-text">前提说明：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">总结：</span></a></li></ol></li></ol></li></ol>
+    
+<style>
+    .left-col .switch-btn,
+    .left-col .switch-area {
+        display: none;
+    }
+    .toc-level-3 i,
+    .toc-level-3 ol {
+        display: none !important;
+    }
+</style>
+</div>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="线程池参数应该如何设置"><a href="#线程池参数应该如何设置" class="headerlink" title="线程池参数应该如何设置"></a>线程池参数应该如何设置</h2><h4 id="前提说明："><a href="#前提说明：" class="headerlink" title="前提说明："></a>前提说明：</h4><p>​	今天为啥要写这篇文章呢，主要是我面试的时候被问到了这样一个问题：</p>
+<p>​	 	面试官： “你在工作中用到过池化技术吗？”</p>
+<p>​		 我：“用到过，用到过线程池”</p>
+<p>​		 面试官：“那你说一下，在实际的项目中你是如何设置线程池的各个参数的大小的？”</p>
+<p>​		我：“如果是CPU密集型任务就把线程数配置为N+1，核数+1；如果是IO密集型任务就配置为2N”</p>
+<p>​	 	面试官：“你真的在工作中实际配置过这些参数吗？”</p>
+<p>​		我：“en….,别人写好了，我直接用的”  内心：tmd我刚工作，这东西怎么会让我来配……</p>
+<hr>
+<p>​	相信很多小伙伴们和我一样。面试前看八股文的时候都看到过“如果是CPU密集型任务就把线程数配置为N+1，核数+1；如果是IO密集型任务就配置为2N” 这样的描述。所以我们潜移默化的认为这个就是公式，别人问的时候答上来就行了。 但是有个很大的问题就是，如果你是应届生，八股是不会问这个的，反而你如果是社招很多都会问。如果在社招中我们也这么回答，可能就会回家等通知了。 那么我们应该如何回答呢？ 等我下面来揭晓</p>
+<hr>
+<p>​	首先需要先声明<strong>线程池的参数的配置没办法量化</strong>，不同的业务可能都会有不同的参数设置，只能理解一下里面的逻辑来方便我们在调试的时候明确思路，至少应该知道怎么调、是变大还是变小。</p>
+<p>​	首先要明确线程池中最核心需要我们调整的就是下面几个参数</p>
+<ul>
+<li>corePoolSize：核心线程数</li>
+<li>maxPoolSize：最大线程数</li>
+<li>queueCapacity：队列大小</li>
+</ul>
+<p>​	我们除了上面的三个外，还需要明确几个参数</p>
+<ul>
+<li>task:每秒执行的任务数</li>
+<li>taskTime:执行一个task所需要的时间</li>
+<li>responseTime:系统允许接受的最大响应时间</li>
+</ul>
+<p>​	下面我们来一个一个说：</p>
+<ol>
+<li>核心线程数</li>
+</ol>
+<p>​		核心线程数和task以及taskTime有直接的关系，一般我们遵循一个公式：corePoolSize&#x3D;task*taskTime</p>
+<p>​		举个例子：如果task&#x3D;100<del>1000,taskTime&#x3D;0.1s,那么我们的核心线程数的大小应该是task*taskTime&#x3D;10</del>100之间。而且我们一般遵循8020准则，就是task的数量以出现概率80%的为准。</p>
+<p>​		理论上随着执行一个task所需要的时间的变长，我们的corePoolSize也会变大，为什么呢？因为：长时间运行的任务会占用核心线程，如果过多的长任务超过了核心线程数，可能导致其他任务排队等待执行，影响系统的性能。</p>
+<blockquote>
+<p>​		<strong>注意：这里就不可以教条了，因为corePoolSize也不能太大，首先要考虑我们机器的配置，机器的cpu数量，此时我们在八股中学到的东西有用处了，为什么分为IO密集型和CPU密集型呢，如果我们仅仅教条的用task*taskTime这个公式的话，如果这是一个CPU密集型的任务那么corePoolSize太多就会导致频繁的进行上下文切换，这个操作反而会带来更多的花销，反而降低系统的吞吐量和响应性能。</strong></p>
+</blockquote>
+<p>​		其中task以及taskTime的获取要通过压测来获取。</p>
+<ol start="2">
+<li>队列大小</li>
+</ol>
+<p>​		队列大小的设置和核心线程数以及我们业务所允许的最大响应时间有关系。队列太大就会导致我们的最大响应时间的变大。我们一般遵循一个公式：</p>
+<p>​			queueCapacity&#x3D;(corePoolSize&#x2F;taskTime)*responseTime</p>
+<p>​		举个例子：taskTime&#x3D;0.1s,corePoolSize&#x3D;10，responseTime&#x3D;2s，那么queueCapacity&#x3D;(10&#x2F;0.1)*2&#x3D;200</p>
+<blockquote>
+<p>​		 <strong>注意：我们也不可以教条，在实际的应用中要看我们业务允许的最大响应时间</strong></p>
+</blockquote>
+<p>​		</p>
+<ol start="3">
+<li>最大线程数大小</li>
+</ol>
+<p>​		我认为最大线程数的大小要根据压测结果去确定了，没有啥公式</p>
+<hr>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><p>​		对于线程池参数的设置这样的面试题，我们把里面的逻辑说清楚，比如哪个参数和什么有关系，而不要一上来就说公式，要说清楚因果关系。另外，在工作中实际的配置参数的确定一定是通过压测尝试出来的，基本不会是计算算出来的。一定要注意。</p>
+
+      
+       <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1525761478@qq.com </span>
+    </div>
+</article>
+
+
+<p>
+    <a  class="dashang" onclick="dashangToggle()">赏</a>
+</p>
+
+
+
+
+
+
+    
+
+
+
+
+    </div>
+    <div class="copyright">
+        <p class="footer-entry">
+    ©2017-2024 Carllyq
+</p>
+<p class="footer-entry">Built with <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/yelog/hexo-theme-3-hexo" target="_blank">3-hexo</a> theme</p>
+
+    </div>
+    <div class="full-toc">
+        <button class="full" data-title="切换全屏 快捷键 s"><span class="min "></span></button>
+<a class="" id="rocket" ></a>
+
+    </div>
+</div>
+
+<div class="hide_box" onclick="dashangToggle()"></div>
+<div class="shang_box">
+    <a class="shang_close"  onclick="dashangToggle()">×</a>
+    <div class="shang_tit">
+        <p>喜欢就点赞,疼爱就打赏</p>
+    </div>
+    <div class="shang_payimg">
+        <div class="pay_img">
+            <img src="/img/alipay.jpg" class="alipay" title="扫码支持">
+            <img src="/img/weixin.jpg" class="weixin" title="扫码支持">
+        </div>
+    </div>
+    <div class="shang_payselect">
+        <span><label><input type="radio" name="pay" checked value="alipay">支付宝</label></span><span><label><input type="radio" name="pay" value="weixin">微信</label></span>
+    </div>
+</div>
+
+
+</body>
+<script src="/js/jquery.pjax.js?v=1.1.0" ></script>
+
+<script src="/js/script.js?v=1.1.0" ></script>
+<script>
+    var img_resize = 'default';
+    function initArticle() {
+        /*渲染对应的表格样式*/
+        
+            $("#post .pjax table").addClass("green_title");
+        
+
+        /*渲染打赏样式*/
+        
+        $("input[name=pay]").on("click", function () {
+            if($("input[name=pay]:checked").val()=="weixin"){
+                $(".shang_box .shang_payimg .pay_img").addClass("weixin_img");
+            } else {
+                $(".shang_box .shang_payimg .pay_img").removeClass("weixin_img");
+            }
+        })
+        
+
+        /*高亮代码块行号*/
+        
+
+        /*访问数量*/
+        
+        $.getScript("//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js");
+        
+
+        /*代码高亮，行号对齐*/
+        $('.pre-numbering').css('line-height',$('.has-numbering').css('line-height'));
+
+        
+        
+    }
+
+    /*打赏页面隐藏与展示*/
+    
+    function dashangToggle() {
+        $(".shang_box").fadeToggle();
+        $(".hide_box").fadeToggle();
+    }
+    
+
+</script>
+
+<!--加入行号的高亮代码块样式-->
+
+<!--自定义样式设置-->
+<style>
+    
+    
+    .nav {
+        width: 542px;
+    }
+    .nav.fullscreen {
+        margin-left: -542px;
+    }
+    .nav-left {
+        width: 120px;
+    }
+    
+    
+    @media screen and (max-width: 1468px) {
+        .nav {
+            width: 492px;
+        }
+        .nav.fullscreen {
+            margin-left: -492px;
+        }
+        .nav-left {
+            width: 100px;
+        }
+    }
+    
+    
+    @media screen and (max-width: 1024px) {
+        .nav {
+            width: 492px;
+            margin-left: -492px
+        }
+        .nav.fullscreen {
+            margin-left: 0;
+        }
+    }
+    
+    @media screen and (max-width: 426px) {
+        .nav {
+            width: 100%;
+        }
+        .nav-left {
+            width: 100%;
+        }
+    }
+    
+    
+    .nav-right .title-list nav a .post-title, .nav-right .title-list #local-search-result a .post-title {
+        color: #383636;
+    }
+    
+    
+    .nav-right .title-list nav a .post-date, .nav-right .title-list #local-search-result a .post-date {
+        color: #5e5e5f;
+    }
+    
+    
+    .nav-right nav a.hover, #local-search-result a.hover{
+        background-color: #e2e0e0;
+    }
+    
+    
+
+    /*列表样式*/
+    
+
+    /* 背景图样式 */
+    
+    
+
+
+    /*引用块样式*/
+    
+
+    /*文章列表背景图*/
+    
+
+    
+</style>
+
+
+
+
+
+
+
+</html>
