@@ -6,18 +6,23 @@
   <meta name="keywords" content=" Java数据类型面试题 ">
   <meta name="description" content="Java数据类型面试题 | 我的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="线程池参数应该如何设置前提说明：​	今天为啥要写这篇文章呢，主要是我面试的时候被问到了这样一个问题： ​	 	面试官： “你在工作中用到过池化技术吗？” ​		 我：“用到过，用到过线程池” ​		 面试官：“那你说一下，在实际的项目中你是如何设置线程池的各个参数的大小的？” ​		我：“如果是CPU密集型任务就把线程数配置为N+1，核数+1；如果是IO密集型任务就配置为2N” ​	 	面试官：“">
+<meta name="description" content="缓存和数据库数据一致性问题解决方案写在前面 在系统开发过程中我们经常会为了提高系统的吞吐量而引入缓存，降低数据库访问的压力，那么引入一个新的组件，势必会带来新的问题，其中比较常见的一个问题就是缓存和数据库中数据的一致性问题了。 通俗的来说也就是： 先更新数据库还是先更新缓存 ​	常见的缓存和数据库数据的更新有两大类分别是： ​		1、写时缓存 ​		2、读时缓存 一、写时缓存​	 ​	写时缓存就是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线程池参数应该如何设置">
-<meta property="og:url" content="http://eyedroplyq.github.io/2024/01/30/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8F%82%E6%95%B0%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE/index.html">
+<meta property="og:title" content="缓存和数据库数据一致性问题解决方案">
+<meta property="og:url" content="http://eyedroplyq.github.io/2024/03/24/%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="线程池参数应该如何设置前提说明：​	今天为啥要写这篇文章呢，主要是我面试的时候被问到了这样一个问题： ​	 	面试官： “你在工作中用到过池化技术吗？” ​		 我：“用到过，用到过线程池” ​		 面试官：“那你说一下，在实际的项目中你是如何设置线程池的各个参数的大小的？” ​		我：“如果是CPU密集型任务就把线程数配置为N+1，核数+1；如果是IO密集型任务就配置为2N” ​	 	面试官：“">
+<meta property="og:description" content="缓存和数据库数据一致性问题解决方案写在前面 在系统开发过程中我们经常会为了提高系统的吞吐量而引入缓存，降低数据库访问的压力，那么引入一个新的组件，势必会带来新的问题，其中比较常见的一个问题就是缓存和数据库中数据的一致性问题了。 通俗的来说也就是： 先更新数据库还是先更新缓存 ​	常见的缓存和数据库数据的更新有两大类分别是： ​		1、写时缓存 ​		2、读时缓存 一、写时缓存​	 ​	写时缓存就是">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-01-30T11:41:48.000Z">
-<meta property="article:modified_time" content="2024-01-30T11:48:13.714Z">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2024/03/24/bcb3d260988f26e6.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2024/03/24/c69b0caf85f31dc4.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2024/03/24/dce3af79617fd453.png">
+<meta property="og:image" content="https://s3.bmp.ovh/imgs/2024/03/24/6f17637f5a5b074c.png">
+<meta property="article:published_time" content="2024-03-24T09:01:06.197Z">
+<meta property="article:modified_time" content="2024-03-24T08:59:56.371Z">
 <meta property="article:author" content="Carl-LYQ">
-<meta property="article:tag" content="线程池参数应该如何设置">
+<meta property="article:tag" content="通用以及常用的一些问题的解决方案总结">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s3.bmp.ovh/imgs/2024/03/24/bcb3d260988f26e6.png">
 
 
 <link rel="icon" href="/img/avatar.jpg">
@@ -128,7 +133,7 @@
     <li>
         <div class="all active" data-rel="全部文章">全部文章
             
-                <small>(40)</small>
+                <small>(41)</small>
             
         </div>
     </li>
@@ -215,7 +220,7 @@
         <div data-rel="后端">
             
             后端
-            <small>(9)</small>
+            <small>(10)</small>
         </div>
         
     </li>
@@ -288,7 +293,7 @@
         
     </div>
 </div>
-<input type="hidden" id="yelog_site_posts_number" value="40">
+<input type="hidden" id="yelog_site_posts_number" value="41">
 
 <div style="display: none">
     <span id="busuanzi_value_site_uv"></span>
@@ -384,6 +389,10 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>设计模式汇总</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>通用以及常用的一些问题的解决方案总结</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -512,6 +521,15 @@
         
         
         <a  class="全部文章 后端 "
+           href="/2024/03/24/%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88/"
+           data-tag="通用以及常用的一些问题的解决方案总结"
+           data-author="" >
+            <span class="post-title" title="缓存和数据库数据一致性问题解决方案">缓存和数据库数据一致性问题解决方案</span>
+            <span class="post-date" title="2024-03-24 17:01:06">2024/03/24</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
            href="/2024/01/30/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%8F%82%E6%95%B0%E5%BA%94%E8%AF%A5%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE/"
            data-tag="线程池参数应该如何设置"
            data-author="" >
@@ -548,6 +566,15 @@
         
         
         <a  class="全部文章 面试题 "
+           href="/2023/12/01/ConcurrentHashMap%20%E4%B8%BA%E4%BD%95%E4%B8%8D%E8%83%BD%E6%8F%92%E5%85%A5%20null%EF%BC%9FHashMap%20%E4%B8%BA%E4%BD%95%E5%8F%AF%E4%BB%A5/"
+           data-tag="ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？"
+           data-author="" >
+            <span class="post-title" title="ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？">ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
            href="/2023/12/01/CDN/"
            data-tag="CDN"
            data-author="" >
@@ -557,19 +584,10 @@
         
         
         <a  class="全部文章 面试题 "
-           href="/2023/12/01/ConcurrentHashMap%20%E4%B8%BA%E4%BD%95%E4%B8%8D%E8%83%BD%E6%8F%92%E5%85%A5%20null%EF%BC%9FHashMap%20%E4%B8%BA%E4%BD%95%E5%8F%AF%E4%BB%A5/"
-           data-tag="ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？"
+           href="/2023/12/01/Java%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E9%9D%A2%E8%AF%95%E9%A2%98/"
+           data-tag="Java数据类型面试题"
            data-author="" >
-            <span class="post-title" title="ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？">ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</span>
-            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
-        </a>
-        
-        
-        <a  class="全部文章 容器化云平台 "
-           href="/2023/12/01/DockerFile/"
-           data-tag="DockerFile总结"
-           data-author="" >
-            <span class="post-title" title="DockerFile总结">DockerFile总结</span>
+            <span class="post-title" title="Java数据类型面试题">Java数据类型面试题</span>
             <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
         </a>
         
@@ -583,11 +601,11 @@
         </a>
         
         
-        <a  class="全部文章 面试题 "
-           href="/2023/12/01/Java%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E9%9D%A2%E8%AF%95%E9%A2%98/"
-           data-tag="Java数据类型面试题"
+        <a  class="全部文章 容器化云平台 "
+           href="/2023/12/01/DockerFile/"
+           data-tag="DockerFile总结"
            data-author="" >
-            <span class="post-title" title="Java数据类型面试题">Java数据类型面试题</span>
+            <span class="post-title" title="DockerFile总结">DockerFile总结</span>
             <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
         </a>
         
@@ -619,15 +637,6 @@
         </a>
         
         
-        <a  class="全部文章 网络通信 "
-           href="/2023/12/01/Netty/"
-           data-tag="Netty"
-           data-author="" >
-            <span class="post-title" title="Netty">Netty</span>
-            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
-        </a>
-        
-        
         <a  class="全部文章 面试题 "
            href="/2023/12/01/MySQL%E8%A1%8C%E9%94%81%E3%80%81%E9%97%B4%E9%9A%99%E9%94%81%E3%80%81%E8%A1%A8%E9%94%81%E7%9A%84%E7%AE%80%E5%8D%95%E8%A7%84%E5%88%99/"
            data-tag="MySQL行锁、间隙锁、表锁的简单规则"
@@ -646,15 +655,6 @@
         </a>
         
         
-        <a  class="全部文章 系统设计 "
-           href="/2023/12/01/RPC%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1/"
-           data-tag="RPC系统设计"
-           data-author="" >
-            <span class="post-title" title="RPC系统设计">RPC系统设计</span>
-            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
-        </a>
-        
-        
         <a  class="全部文章 数据库 "
            href="/2023/12/01/SQL%E4%BC%98%E5%8C%96%E6%89%8B%E6%AE%B5/"
            data-tag="SQL优化手段"
@@ -664,11 +664,38 @@
         </a>
         
         
+        <a  class="全部文章 系统设计 "
+           href="/2023/12/01/RPC%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="RPC系统设计"
+           data-author="" >
+            <span class="post-title" title="RPC系统设计">RPC系统设计</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
         <a  class="全部文章 面试题 "
            href="/2023/12/01/Spring%20%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/"
            data-tag="Spring 如何解决循环依赖？"
            data-author="" >
             <span class="post-title" title="Spring 如何解决循环依赖？">Spring 如何解决循环依赖？</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 网络通信 "
+           href="/2023/12/01/Netty/"
+           data-tag="Netty"
+           data-author="" >
+            <span class="post-title" title="Netty">Netty</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 后端 "
+           href="/2023/12/01/drools%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E/"
+           data-tag="drools规则引擎"
+           data-author="" >
+            <span class="post-title" title="drools规则引擎">drools规则引擎</span>
             <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
         </a>
         
@@ -692,10 +719,10 @@
         
         
         <a  class="全部文章 后端 "
-           href="/2023/12/01/drools%E8%A7%84%E5%88%99%E5%BC%95%E6%93%8E/"
-           data-tag="drools规则引擎"
+           href="/2023/12/01/go%E8%AF%AD%E8%A8%80%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3/"
+           data-tag="Go语言深度理解"
            data-author="" >
-            <span class="post-title" title="drools规则引擎">drools规则引擎</span>
+            <span class="post-title" title="Go语言深度理解">Go语言深度理解</span>
             <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
         </a>
         
@@ -705,15 +732,6 @@
            data-tag="mysql大数据量插入性能优化方案"
            data-author="" >
             <span class="post-title" title="mysql大数据量插入性能优化方案">mysql大数据量插入性能优化方案</span>
-            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
-        </a>
-        
-        
-        <a  class="全部文章 后端 "
-           href="/2023/12/01/go%E8%AF%AD%E8%A8%80%E6%B7%B1%E5%BA%A6%E7%90%86%E8%A7%A3/"
-           data-tag="Go语言深度理解"
-           data-author="" >
-            <span class="post-title" title="Go语言深度理解">Go语言深度理解</span>
             <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
         </a>
         
@@ -790,20 +808,20 @@
         </a>
         
         
-        <a  class="全部文章 网络通信 "
-           href="/2023/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E6%B2%89%E6%B7%80%E6%80%BB%E7%BB%93/"
-           data-tag="计算机网络知识沉淀总结"
-           data-author="" >
-            <span class="post-title" title="计算机网络知识沉淀总结">计算机网络知识沉淀总结</span>
-            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
-        </a>
-        
-        
         <a  class="全部文章 系统设计 "
            href="/2023/12/01/%E7%BB%9F%E8%AE%A1%E7%BD%91%E7%AB%99UV%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/"
            data-tag="统计网站UV设计方案"
            data-author="" >
             <span class="post-title" title="统计网站UV设计方案">统计网站UV设计方案</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 网络通信 "
+           href="/2023/12/01/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E6%B2%89%E6%B7%80%E6%80%BB%E7%BB%93/"
+           data-tag="计算机网络知识沉淀总结"
+           data-author="" >
+            <span class="post-title" title="计算机网络知识沉淀总结">计算机网络知识沉淀总结</span>
             <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
         </a>
         

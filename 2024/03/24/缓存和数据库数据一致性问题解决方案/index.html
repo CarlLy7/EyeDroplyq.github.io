@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>统计网站UV设计方案 | 我的博客</title>
-  <meta name="keywords" content=" 统计网站UV设计方案 ">
-  <meta name="description" content="统计网站UV设计方案 | 我的博客">
+  <title>缓存和数据库数据一致性问题解决方案 | 我的博客</title>
+  <meta name="keywords" content=" 通用以及常用的一些问题的解决方案总结 ">
+  <meta name="description" content="缓存和数据库数据一致性问题解决方案 | 我的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="缓存和数据库数据一致性问题解决方案写在前面 在系统开发过程中我们经常会为了提高系统的吞吐量而引入缓存，降低数据库访问的压力，那么引入一个新的组件，势必会带来新的问题，其中比较常见的一个问题就是缓存和数据库中数据的一致性问题了。 通俗的来说也就是： 先更新数据库还是先更新缓存 ​	常见的缓存和数据库数据的更新有两大类分别是： ​		1、写时缓存 ​		2、读时缓存 一、写时缓存​	 ​	写时缓存就是">
 <meta property="og:type" content="article">
@@ -897,9 +897,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-统计网站UV设计方案" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-缓存和数据库数据一致性问题解决方案" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">统计网站UV设计方案</h1>
+        <h1 class="article-title">缓存和数据库数据一致性问题解决方案</h1>
     
     <div class="article-meta">
         
@@ -909,7 +909,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="系统设计">系统设计</a>
+            <a  data-rel="后端">后端</a>
             
         </span>
         
@@ -917,14 +917,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color1">统计网站UV设计方案</a>
+            <a class="color4">通用以及常用的一些问题的解决方案总结</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-12-02 18:30:14'>2023-12-01 16:44</time>
+            发布时间 : <time class="date" title='最后更新: 2024-03-24 16:59:56'>2024-03-24 17:01</time>
         
     </div>
     <div class="article-meta">
@@ -946,7 +946,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E7%BD%91%E7%AB%99UV%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88"><span class="toc-text">统计网站UV设计方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88"><span class="toc-text">设计方案</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%93%E5%AD%98%E5%92%8C%E6%95%B0%E6%8D%AE%E5%BA%93%E6%95%B0%E6%8D%AE%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">缓存和数据库数据一致性问题解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%89%8D%E9%9D%A2"><span class="toc-text">写在前面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%86%99%E6%97%B6%E7%BC%93%E5%AD%98"><span class="toc-text">一、写时缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%AF%BB%E6%97%B6%E7%BC%93%E5%AD%98"><span class="toc-text">二、读时缓存</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -962,23 +962,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="统计网站UV设计方案"><a href="#统计网站UV设计方案" class="headerlink" title="统计网站UV设计方案"></a>统计网站UV设计方案</h2><h4 id="设计方案"><a href="#设计方案" class="headerlink" title="设计方案"></a>设计方案</h4><p>统计网站UV的设计方案可以按照网站的访问量来进行设计，主要是有两种设计方案</p>
-<p>如果我们的网站的访问量不大的话，可以使用hash表来存储，用网站id+时间作为key,再用访客ip作为set，这样我们就可以对指定的网页来进行去重并且可以统计访问数。</p>
-<p>但是当我们网站的数据量大的时候，我们的性能就会变慢，存的时候先去set中判断有没有重复的，如果set很长的话这个时间就会花费的很多了。</p>
-<p>如果我们的网站的访问量很大的话，上面的设计方案就不可以了，就需要使用下面的设计方案：</p>
-<p>在redis中有一种数据结构叫做Hyperloglog，这个数据结构天生就可以去重，而且内存占用很少，所以非常适合用来作为网站UV统计的数据结构。</p>
-<p>针对redis中某个key,如果我们想要看它的key的序列化长度，以及一些信息的话，我们可以使用命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">debug object key </span><br></pre></td></tr></table></figure>
-
-
-
-<p>通过对hashset和Hyperloglog的内存占用发现，如果有10w个数据的话，Hyperloglog的内存使用大约是10k,而Set的内存使用大约是965kb</p>
-<p>但是要注意，如果使用的是Hyperloglog的话，统计的结果是会有一定的误差的，但是对于统计网站uv这种场景来说的话，这个误差是完全可以接受的。</p>
-<p>如果我们要使用Hyperloglog并且还要能够统计指定时间的访客数的话，我们可以对key进行改造，将时间加在key上。</p>
-<p>当然除了上面的两种方案，我们还可以使用一些开源的项目，比如百度的Doris和俄罗斯的ClickHouse</p>
-<p><img src="https://cdn.jsdelivr.net/gh/EyeDroplyq/myblog-img@master/%E5%88%86%E6%9E%90redis%E4%B8%ADkey%E7%9A%84%E5%BA%8F%E5%88%97%E5%8C%96%E4%BF%A1%E6%81%AF%E5%91%BD%E4%BB%A4.png" alt="分析redis中key的序列化信息命令"></p>
-<p><strong>总结：整体来说，这个方案是很简单，但是前提是要知道redis中的这个Hyperloglog数据结构</strong></p>
-<p>END …..</p>
+        <h2 id="缓存和数据库数据一致性问题解决方案"><a href="#缓存和数据库数据一致性问题解决方案" class="headerlink" title="缓存和数据库数据一致性问题解决方案"></a>缓存和数据库数据一致性问题解决方案</h2><h4 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h4><p> 在系统开发过程中我们经常会为了提高系统的吞吐量而引入缓存，降低数据库访问的压力，那么引入一个新的组件，势必会带来新的问题，其中比较常见的一个问题就是缓存和数据库中数据的一致性问题了。 通俗的来说也就是： <strong>先更新数据库还是先更新缓存</strong></p>
+<p>​	常见的缓存和数据库数据的更新有两大类分别是：</p>
+<p>​		1、<strong>写时缓存</strong></p>
+<p>​		2、<strong>读时缓存</strong></p>
+<h4 id="一、写时缓存"><a href="#一、写时缓存" class="headerlink" title="一、写时缓存"></a>一、写时缓存</h4><p>​	<img src="https://s3.bmp.ovh/imgs/2024/03/24/bcb3d260988f26e6.png"></p>
+<p>​	写时缓存就是 <strong>先更新数据库，然后再更新缓存</strong> ，这种方案有个问题，那就是 <strong>容易出现读到脏数据的问题</strong> ，比如一个线程更新完数据库后还没有更新完缓存，此时有另一个线程来读取缓存，那么就会读取到之前的老数据。</p>
+<p>​	但是写时缓存的这个问题也不是没有解决办法，那就是 <strong>通过加锁，让更新数据库和更新缓存同时只能有一个线程来操作</strong> ，但是这个解决方案的显著问题就是系统性能会变得很差。但是并不是说这种方案没有好处，它的好处就是 <strong>数据的实时性强</strong> 。线程读到的一定是最新的数据。对于对数据一致性有很强要求的场景比如 ‘金融系统’，这种方案是可以考虑的。</p>
+<p>​	但是这种方案还有一个缺点就是： 如果对缓存的更新失败，<strong>需要写操作才能重新操作缓存</strong> ，但是对于大部分业务来说，都是读多写少。这个原因其实也是写时缓存方案使用少的 <strong>主要原因</strong> 。</p>
+<p>​	</p>
+<h4 id="二、读时缓存"><a href="#二、读时缓存" class="headerlink" title="二、读时缓存"></a>二、读时缓存</h4><p>​	读时缓存就是 <strong>先更新数据库，然后将缓存删除，等下次读取操作到来时，去更新最新的缓存数据</strong> 。</p>
+<p>​	这种方案也是无法完全避免读到脏数据的问题的，因为在更新数据库和删除缓存之间，另外的读取依然可以读到脏数据。但是相比于写时缓存方案，读时缓存方案 <strong>如果操作缓存失败，那么下一次的读请求会重新操作缓存</strong> ，同时大部分业务都是读多写少，所以这种方案在公司里使用的更多。</p>
+<p>​	最简单的读时缓存方案对于 <strong>单机的数据库</strong> 来说是可以的，但是如果是对于 <strong>主从架构</strong> 的数据库来说， <strong>可能不太适用</strong> ，因为会带来更多的读取脏数据问题。</p>
+<p>​	简单的读时缓存方案原理图：</p>
+<p>​	<img src="https://s3.bmp.ovh/imgs/2024/03/24/c69b0caf85f31dc4.png"></p>
+<p>​	</p>
+<p>​	对于 <strong>主从架构</strong> 的数据库来说，应该使用 <strong>延迟双删和订阅binlog删除缓存</strong> 这两种读时缓存方案来解决。</p>
+<p>​	1、&#x3D;&#x3D;延迟双删方案&#x3D;&#x3D;</p>
+<p>​				<strong>更新数据库的时候，删除缓存</strong> ，同时可以引入消息中间件mq来 <strong>发送一个延迟消息</strong> ， <strong>延迟一个时间之后再去删除一次缓存</strong> 。这种方案是为了 <strong>保证最终一致性</strong> ，对于强一致性的实现支持不太好。</p>
+<p>​			主从架构的数据库的延迟双删流程图：</p>
+<p>​		<img src="https://s3.bmp.ovh/imgs/2024/03/24/dce3af79617fd453.png"></p>
+<p>​	2、&#x3D;&#x3D;订阅binlog删除缓存方案&#x3D;&#x3D;</p>
+<p>​				<strong>更新数据库的时候，等到slave数据库接收到master的binlog之后再去删除缓存</strong> 。这种方案也是为了 <strong>保证最终一致性</strong> ，对于强一致性的实现支持不太好。</p>
+<p>​				订阅binlog删除缓存方案的流程图：</p>
+<p><img src="https://s3.bmp.ovh/imgs/2024/03/24/6f17637f5a5b074c.png"></p>
+<p>​	<strong>读时缓存方案比较适用于读多写少，并且对于数据的一致性要求不是很高的业务场景</strong></p>
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>​		对于写时缓存还是读时缓存方案的选择各有优缺点和适用场景，对于数据库和缓存的数据一致性问题 <strong>没有绝对的银弹</strong> ，<strong>不要觉得写时缓存公司用的比较少就觉得这种方案不如读时缓存方案好</strong> ，要根据你公司项目的具体情况来进行选择。</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1525761478@qq.com </span>
