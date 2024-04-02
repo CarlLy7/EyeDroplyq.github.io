@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？ | 我的博客</title>
-  <meta name="keywords" content=" ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？ ">
-  <meta name="description" content="ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？ | 我的博客">
+  <title>系统的超时和重试方案 | 我的博客</title>
+  <meta name="keywords" content=" 系统的超时和重试方案 ">
+  <meta name="description" content="系统的超时和重试方案 | 我的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="系统的超时和重试今天难得有时间来写文章，今天就来简单的来写一下系统的超时和重试机制吧。下面附上文章的大纲  一、超时机制1.超时机制概念​	系统的超时机制分为两种，一种是连接超时，另一种是读取超时。  连接超时 客户端与服务器端连接的时间过长，超过了规定的时间，发生了连接超时，主要是客户端与服务器端不能在规定的时间内建立连接。  读取超时 等待超时是客户端已经与服务器建立了连接，但是客户端发出请求">
 <meta property="og:type" content="article">
@@ -907,9 +907,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-ConcurrentHashMap 为何不能插入 null？HashMap 为何可以" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-系统的超时和重试" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</h1>
+        <h1 class="article-title">系统的超时和重试方案</h1>
     
     <div class="article-meta">
         
@@ -919,7 +919,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="面试题">面试题</a>
+            <a  data-rel="系统设计">系统设计</a>
             
         </span>
         
@@ -927,14 +927,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</a>
+            <a class="color1">系统的超时和重试方案</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-12-02 20:35:31'>2023-12-01 16:44</time>
+            发布时间 : <time class="date" title='最后更新: 2024-04-02 22:18:35'>2024-04-02 22:18</time>
         
     </div>
     <div class="article-meta">
@@ -956,7 +956,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ConcurrentHashMap-%E4%B8%BA%E4%BD%95%E4%B8%8D%E8%83%BD%E6%8F%92%E5%85%A5-null%EF%BC%9FHashMap-%E4%B8%BA%E4%BD%95%E5%8F%AF%E4%BB%A5%EF%BC%9F"><span class="toc-text">ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ConcurrentHashMap%E4%B8%BA%E4%BD%95%E4%B8%8D%E8%83%BD%E6%8F%92%E5%85%A5null%EF%BC%9FHashMap%E4%B8%BA%E4%BD%95%E5%8F%AF%E4%BB%A5%EF%BC%9F"><span class="toc-text">ConcurrentHashMap为何不能插入null？HashMap为何可以？</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%B6%85%E6%97%B6%E5%92%8C%E9%87%8D%E8%AF%95"><span class="toc-text">系统的超时和重试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%B6%85%E6%97%B6%E6%9C%BA%E5%88%B6"><span class="toc-text">一、超时机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%B6%85%E6%97%B6%E6%9C%BA%E5%88%B6%E6%A6%82%E5%BF%B5"><span class="toc-text">1.超时机制概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="toc-text">2.超时时间的设置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6"><span class="toc-text">二、重试机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">1.重试机制的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%87%8D%E8%AF%95%E7%9A%84%E7%AD%96%E7%95%A5"><span class="toc-text">2.重试的策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%87%8D%E8%AF%95%E7%9A%84%E6%AC%A1%E6%95%B0%E5%A6%82%E4%BD%95%E8%AE%BE%E7%BD%AE"><span class="toc-text">3.重试的次数如何设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E9%87%8D%E8%AF%95%E5%B9%82%E7%AD%89"><span class="toc-text">4.重试幂等</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E9%87%8D%E8%AF%95%E9%97%B4%E9%9A%94%E6%97%B6%E9%97%B4"><span class="toc-text">5.重试间隔时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-%E8%AF%B7%E6%B1%82%E9%93%BE%E8%B7%AF%E6%8C%87%E6%95%B0%E7%BA%A7%E9%87%8D%E8%AF%95%E9%97%AE%E9%A2%98"><span class="toc-text">6. 请求链路指数级重试问题</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -972,15 +972,49 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="ConcurrentHashMap-为何不能插入-null？HashMap-为何可以？"><a href="#ConcurrentHashMap-为何不能插入-null？HashMap-为何可以？" class="headerlink" title="ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？"></a>ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</h3><h4 id="ConcurrentHashMap为何不能插入null？HashMap为何可以？"><a href="#ConcurrentHashMap为何不能插入null？HashMap为何可以？" class="headerlink" title="ConcurrentHashMap为何不能插入null？HashMap为何可以？"></a>ConcurrentHashMap为何不能插入null？HashMap为何可以？</h4><p>首先ConcurrentHashMap如果key可以插入为null的话会有二义性。首先我们来获得一个key的时候如果返回的这个key是null的话，我们不知道是返回的我们插入的key为null的值还是本身就不存在。所以就存在二义性的问题。</p>
-<p>其次ConcurrentHashMap是多线程的，如果我们一个线程在操作ConcurrentHashMap的时候有另外的线程来进行操作的话，我们没有办法通过ContainKey(key)来判断是否存在这个键值对，所以也就无法解决这个二义性问题了。</p>
-<p>那么至于HashMap中为什么可以存放key为null的数据，主要原因是因为HashMap是单线程的，key为null的话只可以存一个，如果是value为null的话可以存多个。因为是单线程的所以不会存在一个线程在操作HashMap的时候另外的线程来进行修改的情况，所以可以通过Containkey(key)来判断这个key是否存在。</p>
-<p>这也是ConcurrentHashMap的作者所说key不能为null的主要原因。</p>
-<pre><code class="txt">The main reason that nulls aren&#39;t allowed in ConcurrentMaps (ConcurrentHashMaps, ConcurrentSkipListMaps) is that ambiguities that may be just barely tolerable in non-concurrent maps can&#39;t be accommodated. The main one is that if map.get(key) returns null, you can&#39;t detect whether the key explicitly maps to null vs the key isn&#39;t mapped. In a non-concurrent map, you can check this via map.contains(key), but in a concurrent one, the map might have changed between calls.
-</code></pre>
-<p>ConcurrentHashMap是可以保证线程安全的，但是并不代表它可以保证复合操作的原子性。比如，有两个线程都执行了同一个containKey(key)方法，然后put了同一个key的不同的值，那么可能会出现覆盖的问题。所以不能保证原子性。</p>
-<p>如果要保复合操作的原子性，应该使用类似于redis中的复合操作原子性的命令。比如putIfAbsent、compute、computeIfAbsent 、computeIfPresent、merge等。</p>
-<p>在保证复合操作的原子性的方面要使用默认自带的原子操作，不要使用锁，那样就违背了使用ConcurrentHashMap的初衷了。</p>
+        <h2 id="系统的超时和重试"><a href="#系统的超时和重试" class="headerlink" title="系统的超时和重试"></a>系统的超时和重试</h2><p>今天难得有时间来写文章，今天就来简单的来写一下系统的超时和重试机制吧。下面附上文章的大纲</p>
+<p><img src="https://cdn.jsdelivr.net/gh/EyeDroplyq/myblog-img@master/%E7%B3%BB%E7%BB%9F%E8%B6%85%E6%97%B6%E9%87%8D%E8%AF%95%E6%9C%BA%E5%88%B6%E5%A4%A7%E7%BA%B2.png"></p>
+<h3 id="一、超时机制"><a href="#一、超时机制" class="headerlink" title="一、超时机制"></a>一、超时机制</h3><h4 id="1-超时机制概念"><a href="#1-超时机制概念" class="headerlink" title="1.超时机制概念"></a>1.超时机制概念</h4><p>​	系统的超时机制分为两种，一种是连接超时，另一种是读取超时。</p>
+<ul>
+<li><p>连接超时</p>
+<p>客户端与服务器端连接的时间过长，超过了规定的时间，发生了连接超时，主要是客户端与服务器端不能在规定的时间内建立连接。</p>
+</li>
+<li><p>读取超时</p>
+<p>等待超时是客户端已经与服务器建立了连接，但是客户端发出请求后在规定的时间内，客户端没有收到服务器发来的响应，从而发生了读取超时。</p>
+</li>
+</ul>
+<p>超时会带来很多问题，比如因为超时可能会导致大量的连接和请求发生堆积，影响新的请求的处理。严重的甚至可能会拖垮整个系统。</p>
+<h4 id="2-超时时间的设置"><a href="#2-超时时间的设置" class="headerlink" title="2.超时时间的设置"></a>2.超时时间的设置</h4><p>​	超时时间的设置不能太大，也不能太小，如果超时时间设置的太大的话，那么超时时间就没有意义了，如果设置的太小的话，会因为系统在处理某些请求变慢的情况下发生大量的重试请求，也会造成大量的重试请求，来增加系统的请求压力，严重的话可能会拖垮整个系统。</p>
+<p>​	超时时间的设置并没有一个银弹，应该根据你们公司的资源以及业务的要求来选择合适的时间。这里只是说一些比较通用的超时时间的设置。</p>
+<p>​	对于连接超时时间的设置，可以设置的稍微大些，建议在1000ms~5000ms之间。对于读取超时时间的设置建议在1500ms附近。</p>
+<p>​	当然在实际的项目中，推荐把超时时间做成一个配置，放到配置中心中，这样就可以动态的修改。而且我们要 <strong>针对不同的业务设置不同的超时时间，上下游的超时时间不应该直接相等</strong> 。</p>
+<h3 id="二、重试机制"><a href="#二、重试机制" class="headerlink" title="二、重试机制"></a>二、重试机制</h3><h4 id="1-重试机制的概念"><a href="#1-重试机制的概念" class="headerlink" title="1.重试机制的概念"></a>1.重试机制的概念</h4><p>​	简单的来说重试机制就是当我们的请求因为超时等原因没有被正确处理后，重新发送相同的请求，尽可能让请求成功被处理。</p>
+<h4 id="2-重试的策略"><a href="#2-重试的策略" class="headerlink" title="2.重试的策略"></a>2.重试的策略</h4><p>​	重试的策略分为两种，一种是固定时间间隔重试，另一种是梯形时间间隔重试。</p>
+<ul>
+<li><p>固定时间间隔重试</p>
+<p>固定时间间隔重试比较简单，故名思议就是多次重试之间的时间间隔是固定的。但是固定时间间隔重试策略有一个问题，那就是如果设置的太小的话会导致因为间隔时间太短导致多次重试都不会成功。比较适合系统恢复时间比较稳定和可预测的场景。</p>
+</li>
+<li><p>梯形时间间隔重试</p>
+<p>梯形时间间隔重试是多个重试之间的时间间隔是变化的，比如第一次1s,第二次2s,第三次4s这种。实现起来比较麻烦，需要维护额外的状态。比较适合系统恢复时间不稳定不可预测的场景。</p>
+</li>
+</ul>
+<h4 id="3-重试的次数如何设置"><a href="#3-重试的次数如何设置" class="headerlink" title="3.重试的次数如何设置"></a>3.重试的次数如何设置</h4><p>​	重试次数比较推荐为3次。不应该过多，因为重试次数太多的话，会对系统负荷带来比较大的压力。</p>
+<p>​	重试次数的设置也可以写到配置中心，来做成一个配置。</p>
+<h4 id="4-重试幂等"><a href="#4-重试幂等" class="headerlink" title="4.重试幂等"></a>4.重试幂等</h4><p>​	重试带来的最常见的问题就是幂等性。可能一个请求已经成功发送了，但是服务器处理的时间比较久了，这个时候系统认为超时了，出发了重试机制，这个相同的请求再次发出，这就会导致服务器收到了两个相同的请求，对于一些敏感场景，比如支付，一个人已经支付成功了，但是因为重试又导致重复支付一遍，那么会导致很严重的后果，所以对于敏感业务的接口的重试机制我们一般需要做接口的幂等性。相同的请求只处理一次。</p>
+<h4 id="5-重试间隔时间"><a href="#5-重试间隔时间" class="headerlink" title="5.重试间隔时间"></a>5.重试间隔时间</h4><p>​	目前业界比较流行的重试时间间隔方案就是 <strong>退避策略</strong>。</p>
+<p>​	退避策略一般分为三种：</p>
+<ul>
+<li>线性退避： 每次等待固定的时间进行重试</li>
+<li>随机退避： 每次在指定的时间范围内随机选择一个时间间隔进行重试</li>
+<li>指数退避： 连续重试时，每次等待时间都是前一次的倍数</li>
+</ul>
+<h4 id="6-请求链路指数级重试问题"><a href="#6-请求链路指数级重试问题" class="headerlink" title="6. 请求链路指数级重试问题"></a>6. 请求链路指数级重试问题</h4><p>​	在重试中有个很重要的问题是防止链路上的指数级重试，举个简单的例子：调用的链路 A-&gt;B-&gt;C</p>
+<p>​	如果B调用C的时候因为网络抖动或者其他原因导致超时，触发了B-&gt;C的重试，那么A-&gt;B的调用大概率也会失败从而触发A-&gt;B的重试，而A-&gt;B重试又会触发B-&gt;C的调用。这样就会在链路上爆发指数级的重试。</p>
+<p>​	为了解决这个问题，可以在上游请求中增加一个tag,这个tag来标识下游请求需不需要重试，举个例子：</p>
+<p>​		<strong>如果A在调用B时设置tag为不重试，那么B在收到A的请求后在调用C的时候即使失败了，B也不会重试调用C，同时B在请求C的时候也会将这个tag根据自己的需要向下传递</strong></p>
+<p>​		这样理论上，可以防止链路上的指数级重试。但是会对代码有一定的侵入性</p>
+<p>​		另外为了应对链路指数级重试问题，我们还需要 <strong>接入重试熔断方案</strong> 来进行熔断，防止因为重试将整个服务甚至系统搞崩溃。</p>
+<p>​	</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1525761478@qq.com </span>
