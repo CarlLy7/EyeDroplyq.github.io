@@ -2,9 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？ | 我的博客</title>
-  <meta name="keywords" content=" ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？ ">
-  <meta name="description" content="ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？ | 我的博客">
+  <title>各种消息队列经典问题解决方案 | 我的博客</title>
+  <meta name="keywords" content=" 各种消息队列经典问题解决方案 ">
+  <meta name="description" content="各种消息队列经典问题解决方案 | 我的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="description" content="写在开头：​	对于消息队列这种中间件来说，只要进入消息队列就会有几个绕不开的问题，比如：消息丢失 、顺序消费 、消息积压 、重复消费 ，下面就来讲解一下市面上比较常见的各个不同的消息队列产品针对这四个问题的解决方案。  1、Kafka消息丢失解决方案对于Kafka这个消息队列来说，消息丢失的环节有下面的几个地方： 1、 消息生产者发送消息给Broker的时候数据丢失 2、Broker异常导致Bro">
 <meta property="og:type" content="article">
@@ -933,9 +933,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-ConcurrentHashMap 为何不能插入 null？HashMap 为何可以" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-各种消息队列经典问题解决方案" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</h1>
+        <h1 class="article-title">各种消息队列经典问题解决方案</h1>
     
     <div class="article-meta">
         
@@ -945,7 +945,7 @@
             <i class="iconfont icon-category"></i>
             
             
-            <a  data-rel="面试题">面试题</a>
+            <a  data-rel="通用以及常用的一些问题的解决方案总结">通用以及常用的一些问题的解决方案总结</a>
             
         </span>
         
@@ -953,14 +953,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color4">ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</a>
+            <a class="color5">各种消息队列经典问题解决方案</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2023-12-02 20:35:31'>2023-12-01 16:44</time>
+            发布时间 : <time class="date" title='最后更新: 2024-05-08 21:25:25'>2024-05-08 21:26</time>
         
     </div>
     <div class="article-meta">
@@ -982,7 +982,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ConcurrentHashMap-%E4%B8%BA%E4%BD%95%E4%B8%8D%E8%83%BD%E6%8F%92%E5%85%A5-null%EF%BC%9FHashMap-%E4%B8%BA%E4%BD%95%E5%8F%AF%E4%BB%A5%EF%BC%9F"><span class="toc-text">ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ConcurrentHashMap%E4%B8%BA%E4%BD%95%E4%B8%8D%E8%83%BD%E6%8F%92%E5%85%A5null%EF%BC%9FHashMap%E4%B8%BA%E4%BD%95%E5%8F%AF%E4%BB%A5%EF%BC%9F"><span class="toc-text">ConcurrentHashMap为何不能插入null？HashMap为何可以？</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%86%99%E5%9C%A8%E5%BC%80%E5%A4%B4%EF%BC%9A"><span class="toc-text">写在开头：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81Kafka"><span class="toc-text">1、Kafka</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">消息丢失解决方案</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">顺序消费解决方案</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">消息积压解决方案</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">重复消费解决方案</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81RabbitMQ"><span class="toc-text">2、RabbitMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="toc-text">消息丢失解决方案</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="toc-text">顺序消费解决方案</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="toc-text">消息积压解决方案</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1"><span class="toc-text">重复消费解决方案</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81RocketMQ"><span class="toc-text">3、RocketMQ</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="toc-text">消息丢失解决方案</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A1%BA%E5%BA%8F%E6%B6%88%E8%B4%B9%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="toc-text">顺序消费解决方案</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B6%88%E6%81%AF%E7%A7%AF%E5%8E%8B%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="toc-text">消息积压解决方案</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-2"><span class="toc-text">重复消费解决方案</span></a></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -998,15 +998,133 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="ConcurrentHashMap-为何不能插入-null？HashMap-为何可以？"><a href="#ConcurrentHashMap-为何不能插入-null？HashMap-为何可以？" class="headerlink" title="ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？"></a>ConcurrentHashMap 为何不能插入 null？HashMap 为何可以？</h3><h4 id="ConcurrentHashMap为何不能插入null？HashMap为何可以？"><a href="#ConcurrentHashMap为何不能插入null？HashMap为何可以？" class="headerlink" title="ConcurrentHashMap为何不能插入null？HashMap为何可以？"></a>ConcurrentHashMap为何不能插入null？HashMap为何可以？</h4><p>首先ConcurrentHashMap如果key可以插入为null的话会有二义性。首先我们来获得一个key的时候如果返回的这个key是null的话，我们不知道是返回的我们插入的key为null的值还是本身就不存在。所以就存在二义性的问题。</p>
-<p>其次ConcurrentHashMap是多线程的，如果我们一个线程在操作ConcurrentHashMap的时候有另外的线程来进行操作的话，我们没有办法通过ContainKey(key)来判断是否存在这个键值对，所以也就无法解决这个二义性问题了。</p>
-<p>那么至于HashMap中为什么可以存放key为null的数据，主要原因是因为HashMap是单线程的，key为null的话只可以存一个，如果是value为null的话可以存多个。因为是单线程的所以不会存在一个线程在操作HashMap的时候另外的线程来进行修改的情况，所以可以通过Containkey(key)来判断这个key是否存在。</p>
-<p>这也是ConcurrentHashMap的作者所说key不能为null的主要原因。</p>
-<pre><code class="txt">The main reason that nulls aren&#39;t allowed in ConcurrentMaps (ConcurrentHashMaps, ConcurrentSkipListMaps) is that ambiguities that may be just barely tolerable in non-concurrent maps can&#39;t be accommodated. The main one is that if map.get(key) returns null, you can&#39;t detect whether the key explicitly maps to null vs the key isn&#39;t mapped. In a non-concurrent map, you can check this via map.contains(key), but in a concurrent one, the map might have changed between calls.
-</code></pre>
-<p>ConcurrentHashMap是可以保证线程安全的，但是并不代表它可以保证复合操作的原子性。比如，有两个线程都执行了同一个containKey(key)方法，然后put了同一个key的不同的值，那么可能会出现覆盖的问题。所以不能保证原子性。</p>
-<p>如果要保复合操作的原子性，应该使用类似于redis中的复合操作原子性的命令。比如putIfAbsent、compute、computeIfAbsent 、computeIfPresent、merge等。</p>
-<p>在保证复合操作的原子性的方面要使用默认自带的原子操作，不要使用锁，那样就违背了使用ConcurrentHashMap的初衷了。</p>
+        <h4 id="写在开头："><a href="#写在开头：" class="headerlink" title="写在开头："></a>写在开头：</h4><p>​	对于消息队列这种中间件来说，只要进入消息队列就会有几个绕不开的问题，比如：<strong>消息丢失</strong> 、<strong>顺序消费</strong> 、<strong>消息积压</strong> 、<strong>重复消费</strong> ，下面就来讲解一下市面上比较常见的各个不同的消息队列产品针对这四个问题的解决方案。</p>
+<hr>
+<h4 id="1、Kafka"><a href="#1、Kafka" class="headerlink" title="1、Kafka"></a>1、Kafka</h4><h5 id="消息丢失解决方案"><a href="#消息丢失解决方案" class="headerlink" title="消息丢失解决方案"></a>消息丢失解决方案</h5><p>对于Kafka这个消息队列来说，消息丢失的环节有下面的几个地方：</p>
+<p>1、 <strong>消息生产者发送消息给Broker的时候数据丢失</strong></p>
+<p>2、<strong>Broker异常导致Broker中的数据丢失</strong></p>
+<p>3、<strong>消息消费者消费异常导致消息丢失</strong></p>
+<p>只要我们分别针对这几个不同的环节采取相应的措施就可以有效的防止消息发生丢失，下面就来说一下各个环节的措施：</p>
+<ul>
+<li><p>针对 <strong>消息生产者发送消息给Broker的时候数据丢失</strong> </p>
+<p>​	首先我们发送消息的流程是将一个消息发送给指定的topic下的分区中，并且在实际的生产环境下我们 <strong>一般都是使用多个Broker来保证Kafka的高可用</strong> 的，所以一个Topic有多个分区，并且 <strong>同一个Topic下的分区会按照主从模式来设置</strong> ，一般是一个Topic下有一个主分区和多个从分区，并且 <strong>不同的Topic下的主分区一般要部署在不同的Broker下</strong> ，来进行隔离。</p>
+<p>​		所以我们在消息发送的时候关键的一点就是 ：<strong>保证我们的消息成功发出去了</strong> 。所以在进行发送数据的时候Kafka可以来 <strong>使用acks参数</strong> 来指定写入语义，其中acks有三个值，分别是 <strong>acks&#x3D;0,acks&#x3D;1,acks&#x3D;all</strong></p>
+<p>​		<strong>acks&#x3D;0</strong> :最简单的生产者写入语义，表示我 <strong>只管发送</strong>，发送出去之后至于 <strong>broker是否收到、是否持久化、是否主从同步</strong> 我<strong>不关心</strong>。当然这种写入语义是会导致消息丢失的，所以生产中一般不会使用这种写入语义。</p>
+<p>​		<strong>acks&#x3D;1</strong> ：<strong>当Broker中的主分区写入成功的时候就认为发送成功了，不关心从分区是否成功同步消息</strong> 。这个写入语义也是会导致消息丢失的，比如主分区写入了但是还没有同步给从分区，这时候主分区宕机了，然后从分区中是没有这个消息的。</p>
+<p>​		<strong>acks&#x3D;all</strong> : <strong>主分区不仅收到了消息并且完成了分区的主从同步</strong> 。这个写入语义相比于上面的两个写入语义更加保险，所以在生产中一般推荐使用这个写入语义。当然这种写入语义的性能可能比上面两种写入语义的 <strong>性能差</strong> ，毕竟有得必有失嘛。</p>
+<blockquote>
+<p>​	补充  ： ISR：<strong>与主分区保持了同步的从分区的数量</strong>。比如ISR设置为2，代表着与主分区完成了同步的从分区至少有2个，如果少于两个消息就会发送失败。所以我们在保证生产者发送消息的时候也要配合执行ISR的数量。</p>
+<p>​	但是我们 <strong>acks&#x3D;all的时候一般要配合禁用unClean</strong>， unClean是如果ISR中没有任何的分区的时候会选择第一个从分区来作为主分区，那么unClean选举出来的主分区也可能是没有数据的。</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="顺序消费解决方案"><a href="#顺序消费解决方案" class="headerlink" title="顺序消费解决方案"></a>顺序消费解决方案</h5><p>​	①、Kafka中的 <strong>每个分区中的消息是天生保证顺序消费的</strong> ，所以 <strong>最简单</strong> 的保证顺序消费的方式就是 <strong>一个Topic只有一个分区</strong>，那么消费者消费这个分区的消息的时候就是顺序消费的。这种 <strong>单分区</strong> 的方案有两个重要的问题：</p>
+<ol>
+<li><strong>性能差，无法应对高并发</strong>。因为只有一个分区所以只有一个Broker所以高并发的时候请求都来到了一个Broker上</li>
+<li>只有一个分区，所以对应的只有一个消费者，<strong>容易造成消息积压</strong></li>
+</ol>
+<p>​	②、Kafka中消息发送的时候消息 <strong>生产者可以指定将消息发送给哪个Topic的哪个分区中</strong> 。所以我们可以 <strong>使用多个分区</strong>，只需要保证 <strong>同一个业务下的消息发送到同一个分区</strong> 就可以了。</p>
+<p>​		但是这个方案还有有两个问题的：</p>
+<ol>
+<li><p>数据可能分配不均匀，产生某些分区有大量的消息，另一些分区消息很少，大量消息的分区可能就会导致 <strong>消息积压</strong><br>   针对 <strong>数据分布不均匀</strong> 的问题，常见的方案就是使用 <strong>一致性哈希算法</strong> 。我们将分区做成一个哈希环，然后我们根据消息的业务标识去计算哈希值来决定分配到哪个分区，同时我们是可以根据分区数据的分配情况来调整分区的数量来让数据分配均匀的。</p>
+</li>
+<li><p>增加分区后可能会导致 **消息乱序 **</p>
+<p>一个最基本的方案就是让 <strong>新增的分区先暂停消费一段时间</strong> ，让原来的老分区先消费完毕之后再消费。</p>
+</li>
+</ol>
+<p>​	上面说的两种方法针对的都是同一个Topic下的消息有序，如果设计到多个不同的Topic下分区消息有序的话，那么需要引入一个协调者。</p>
+<p>​	③、<strong>本地内存队列+多线程消费</strong> ：</p>
+<p>​		可以使用一个消费者来将Kafka对应分区中的消息取出来，然后根据业务标识 <strong>分配到不同的内存队列中</strong> ，然后不同的线程去自己对应的队列中执行任务。这样也可以保证同一业务下的消息有序性。</p>
+<p>​		</p>
+<h5 id="消息积压解决方案"><a href="#消息积压解决方案" class="headerlink" title="消息积压解决方案"></a>消息积压解决方案</h5><p>​	①、增加消费者的数量和分区数量一样多</p>
+<p>​	②、增加分区数量</p>
+<p>​	③、如果公司不允许增加分区的话，可以创建一个新的Topic，这个Topic下有更多的分区，然后让新的消息发送到这个新的Topic中，同时创建一个消费者去消费老Topic分区中的数据，只是负责将老Topic分区中的数据转发到新的Topic的分区中。</p>
+<p>​	④、优化消费者的性能</p>
+<ol>
+<li>使用更好的机器</li>
+<li>对消费者的业务逻辑进行优化</li>
+</ol>
+<p>​    ⑤、<strong>批量消费+多线程</strong> ：消费者一次从队列中拉去一批比如10个消息进行处理，然后交给10个线程并发执行然后批量提交。</p>
+<p>​			但是这个方案有两个问题：<strong>1. 重复消费 2. 部分失败</strong> </p>
+<p>​			针对重复消费的问题我们可以使用幂等性来处理。</p>
+<p>​			针对部分失败的问题： 1. 失败后立即重试，但是要注意设置重试的次数和重试时间 2. 使用一个异步线程来进行重试 3. 将失败的消息重新丢回到消息队列中，但是要注意标记失败次数，当达到一个最大失败次数之后就不重试了，需要人工干预了。</p>
+<p>​		</p>
+<h5 id="重复消费解决方案"><a href="#重复消费解决方案" class="headerlink" title="重复消费解决方案"></a>重复消费解决方案</h5><p>​	解决重复消费的方案就是保证接口的 <strong>幂等性</strong> ，即使多次消费同一个消息，那么对应的后续的逻辑也只会执行一次。</p>
+<p>​	①、使用唯一索引</p>
+<p>​		使用唯一索引应该是最简单的保证幂等性的方法。但是使用唯一索引来实现幂等性的时候要注意两个地方：</p>
+<ol>
+<li>要将插入唯一索引和业务处理放在 <strong>同一个本地事务</strong> 中。不然可能会出现成功插入了唯一索引但是业务处理失败了，那么之后这个消息就再也得不到执行了。</li>
+<li>如果因为种种原因不能使用本地事务，那么就需要考虑 <strong>最终一致性</strong> 方案了，这个时候就需要引入一个第三方了，比如我们可以引入一个 <strong>定时任务</strong> 。流程如下：我们先插入数据到唯一索引中，同时唯一索引对应的数据设置为 <strong>初始状态</strong> ；然后进行业务处理；如果业务成功处理那么就将唯一索引对应的数据设置为 <strong>成功状态</strong> ；同时我们的异步任务会 <strong>定时扫描</strong> 唯一索引中为初始状态的数据，然后和业务处理表中的数据进行对比，如果发现业务表中成功处理了但是唯一索引表中的状态还是初始状态，那么就将唯一索引中的数据状态变成成功。反正可以触发 <strong>重试机制</strong> 。</li>
+</ol>
+<p>​	但是使用唯一索引的方案有一个缺点就是： <strong>性能瓶颈在数据库上，无法支持高并发</strong></p>
+<p>​	②、<strong>布隆过滤器+Redis+唯一索引</strong></p>
+<p>​		大概的流程如下：1. 请求来了之后先经过布隆过滤器判断，如果布隆过滤器判断这个唯一标识不存在说明这个消息没有被处理过，那么就可以直接执行；如果这个布隆过滤器判断存在那么有一定的概率出现误判，所以我们又加了一个Redis;</p>
+<p>​	这个Redis中存放了最近处理的消息的唯一标识，然后判断如果Redis中存在这个消息的唯一标识，那么说明这个消息已经处理过了，那么就不会进行处理，如果Redis中不存在则会进入到数据库层；</p>
+<p>​	进入到数据库层面后利用唯一索引来判断这个消息是不是处理过了，如果插入失败说明已经消费过了，则不进行处理；如果插入成功说明没有消费过则执行消息的消费逻辑。</p>
+<p>​	</p>
+<hr>
+<h4 id="2、RabbitMQ"><a href="#2、RabbitMQ" class="headerlink" title="2、RabbitMQ"></a>2、RabbitMQ</h4><h5 id="消息丢失解决方案-1"><a href="#消息丢失解决方案-1" class="headerlink" title="消息丢失解决方案"></a>消息丢失解决方案</h5><p>​	针对消息生产者是否成功叫消息发送给交换机：</p>
+<p>​		可以使用RabbitMQ中的 <strong>confirm机制</strong> ，如果RabbitMQ成功接收到消息之后会给消息生产者返回一个confirm，当消息生产者接收到confirm的时候就可以判定RabbitMQ已经成功接收到消息了，消息成功发送了，反之说明消息可能没有成功发送，需要进行重试发送。</p>
+<p>​		还可以使用RabbitMQ提供的 <strong>事务机制</strong> ，在发送消息的时候做成一个事务，来保证发送的消息要么全部成功，要么全部失败。</p>
+<blockquote>
+<p>​	注意：confirm机制和事务机制，<strong>只能同时使用一个</strong>，不能一起使用。</p>
+</blockquote>
+<p>​	针对RabbitMQ服务器宕机导致RabbitMQ中的消息丢失：</p>
+<p>​		开启RabbitMQ的 <strong>持久化</strong> 功能，在交换机中进行持久化，同时也在队列中进行持久化。</p>
+<p>​	针对消费者消费消息的时候发生了异常，导致消息从RabbitMQ中丢失：</p>
+<p>​		关闭RabbitMQ的自动ack机制，使用 <strong>手动ACK机制</strong> ，当消费者确实成功消费后给RabbitMQ一个ACK信号，然后RabbitMQ可以根据配置来决定是不是要将这个消息删除。</p>
+<h5 id="顺序消费解决方案-1"><a href="#顺序消费解决方案-1" class="headerlink" title="顺序消费解决方案"></a>顺序消费解决方案</h5><p>​	①、<strong>使用多个队列</strong> ：每个业务对应一个队列，将对应的业务中的消息发送给对应的队列，然后消费者消费自己对应的业务队列即可</p>
+<p>​	②、<strong>本地内存队列+多线程消费</strong> ：使用一个队列，然后消费者从队列中将消息取出来，然后根据业务标识将消息放入到不同的内存队列中，然后不同的线程消费自己对应的内存队列。</p>
+<h5 id="消息积压解决方案-1"><a href="#消息积压解决方案-1" class="headerlink" title="消息积压解决方案"></a>消息积压解决方案</h5><p>​	①、对于RabbitMQ来说，消息积压问题比较好解决，因为一个队列可以对应有多个消费者，多个消费者轮询消费队列中的消息，所以一旦出现了消息积压，我们最简单的方式就是可以 <strong>增加消费者的数量</strong> 。</p>
+<p>​	②、<strong>使用优先级队列</strong> ：我们有些任务可能有比较高的优先级，我们对实时性要求比较高，那么我们可以使用优先级队列将优先级高的任务发到优先级队列中，让优先级高的消息优先得到消费</p>
+<p>​	③、<strong>优化消费者的性能</strong> </p>
+<ol>
+<li>使用更好的机器</li>
+<li>对消费者的业务逻辑进行优化</li>
+</ol>
+<h5 id="重复消费解决方案-1"><a href="#重复消费解决方案-1" class="headerlink" title="重复消费解决方案"></a>重复消费解决方案</h5><p>​	对于三种消息队列的重复消费解决方案其实都一样，都是保证接口的 <strong>幂等性</strong> 即可。</p>
+<p>​	解决重复消费的方案就是保证接口的幂等性，即使多次消费同一个消息，那么对应的后续的逻辑也只会执行一次。</p>
+<p>​	①、使用唯一索引</p>
+<p>​		使用唯一索引应该是最简单的保证幂等性的方法。但是使用唯一索引来实现幂等性的时候要注意两个地方：</p>
+<ol>
+<li>要将插入唯一索引和业务处理放在同一个本地事务中。不然可能会出现成功插入了唯一索引但是业务处理失败了，那么之后这个消息就再也得不到执行了。</li>
+<li>如果因为种种原因不能使用本地事务，那么就需要考虑最终一致性方案了，这个时候就需要引入一个第三方了，比如我们可以引入一个定时任务。流程如下：我们先插入数据到唯一索引中，同时唯一索引对应的数据设置为初始状态；然后进行业务处理；如果业务成功处理那么就将唯一索引对应的数据设置为成功状态；同时我们的异步任务会定时扫描唯一索引中为初始状态的数据，然后和业务处理表中的数据进行对比，如果发现业务表中成功处理了但是唯一索引表中的状态还是初始状态，那么就将唯一索引中的数据状态变成成功。反正可以出发重试机制。</li>
+</ol>
+<p>​	但是使用唯一索引的方案有一个缺点就是： 性能瓶颈在数据库上，无法支持高并发</p>
+<p>​	②、<strong>布隆过滤器+Redis+唯一索引</strong> </p>
+<p>​		大概的流程如下：1. 请求来了之后先经过布隆过滤器判断，如果布隆过滤器判断这个唯一标识不存在说明这个消息没有被处理过，那么就可以直接执行；如果这个布隆过滤器判断存在那么有一定的概率出现误判，所以我们又加了一个Redis;</p>
+<p>​	这个Redis中存放了最近处理的消息的唯一标识，然后判断如果Redis中存在这个消息的唯一标识，那么说明这个消息已经处理过了，那么就不会进行处理，如果Redis中不存在则会进入到数据库层；</p>
+<p>​	进入到数据库层面后利用唯一索引来判断这个消息是不是处理过了，如果插入失败说明已经消费过了，则不进行处理；如果插入成功说明没有消费过则执行消息的消费逻辑。</p>
+<hr>
+<h4 id="3、RocketMQ"><a href="#3、RocketMQ" class="headerlink" title="3、RocketMQ"></a>3、RocketMQ</h4><h5 id="消息丢失解决方案-2"><a href="#消息丢失解决方案-2" class="headerlink" title="消息丢失解决方案"></a>消息丢失解决方案</h5><p>​	针对消息生产者将消息投递给RocketMQ的时候发生消息丢失：</p>
+<p>​		消息生产者可以选择使用 <strong>同步发送</strong> ，消息发出去后会 <strong>阻塞等待</strong> Broker确认成功接收到消息。</p>
+<p>​	针对RocketMQ宕机发生的消息丢失的情况：</p>
+<p>​		开启RocketMQ的 <strong>持久化</strong> 功能，将RocketMQ中的消息进行持久化；RocketMQ使用 <strong>主从架构</strong> 来进行部署。</p>
+<p>​	针对RocketMQ消费者消费消息失败后导致的消息丢失的情况：</p>
+<p>​		开启 <strong>手动ACK机制</strong> ，当消费者成功将消息消费后给RocketMQ发送一个ACK消息，只有当RocketMQ接收到后才会确认消息是被成功消费了。</p>
+<p>​	</p>
+<h5 id="顺序消费解决方案-2"><a href="#顺序消费解决方案-2" class="headerlink" title="顺序消费解决方案"></a>顺序消费解决方案</h5><p>​	RocketMQ中生产者在给Topic发送消息的时候，默认使用轮询机制给该Topic下的所有队列进行发送消息。如果我们要保证有序的话，我们可以使用 <strong>哈希+取模</strong> 的算法来针对同一个业务的业务标识来计算 <strong>将同一个业务的消息发送到同一个队列中</strong> ，同一个队列中的消息是天生有序消费的。</p>
+<h5 id="消息积压解决方案-2"><a href="#消息积压解决方案-2" class="headerlink" title="消息积压解决方案"></a>消息积压解决方案</h5><p>​	①、<strong>增加消费者的数量</strong> ：因为一个队列只能有一个消费者，所以一般也需要增加更多的队列数量</p>
+<p>​	②、<strong>使用批量处理，RocketMQ是支持批量消息的</strong></p>
+<p>​	③、<strong>优化消费者的性能</strong></p>
+<ol>
+<li>使用更好的机器</li>
+<li>对消费者的业务逻辑进行优化</li>
+</ol>
+<h5 id="重复消费解决方案-2"><a href="#重复消费解决方案-2" class="headerlink" title="重复消费解决方案"></a>重复消费解决方案</h5><p>​	对于三种消息队列的重复消费解决方案其实都一样，都是保证接口的幂等性即可。</p>
+<p>​	解决重复消费的方案就是保证接口的幂等性，即使多次消费同一个消息，那么对应的后续的逻辑也只会执行一次。</p>
+<p>​	①、<strong>使用唯一索引</strong></p>
+<p>​		使用唯一索引应该是最简单的保证幂等性的方法。但是使用唯一索引来实现幂等性的时候要注意两个地方：</p>
+<ol>
+<li>要将插入唯一索引和业务处理放在同一个本地事务中。不然可能会出现成功插入了唯一索引但是业务处理失败了，那么之后这个消息就再也得不到执行了。</li>
+<li>如果因为种种原因不能使用本地事务，那么就需要考虑最终一致性方案了，这个时候就需要引入一个第三方了，比如我们可以引入一个定时任务。流程如下：我们先插入数据到唯一索引中，同时唯一索引对应的数据设置为初始状态；然后进行业务处理；如果业务成功处理那么就将唯一索引对应的数据设置为成功状态；同时我们的异步任务会定时扫描唯一索引中为初始状态的数据，然后和业务处理表中的数据进行对比，如果发现业务表中成功处理了但是唯一索引表中的状态还是初始状态，那么就将唯一索引中的数据状态变成成功。反正可以出发重试机制。</li>
+</ol>
+<p>​	但是使用唯一索引的方案有一个缺点就是： 性能瓶颈在数据库上，无法支持高并发</p>
+<p>​	②、<strong>布隆过滤器+Redis+唯一索引</strong></p>
+<p>​		大概的流程如下：1. 请求来了之后先经过布隆过滤器判断，如果布隆过滤器判断这个唯一标识不存在说明这个消息没有被处理过，那么就可以直接执行；如果这个布隆过滤器判断存在那么有一定的概率出现误判，所以我们又加了一个Redis;</p>
+<p>​	这个Redis中存放了最近处理的消息的唯一标识，然后判断如果Redis中存在这个消息的唯一标识，那么说明这个消息已经处理过了，那么就不会进行处理，如果Redis中不存在则会进入到数据库层；</p>
+<p>​	进入到数据库层面后利用唯一索引来判断这个消息是不是处理过了，如果插入失败说明已经消费过了，则不进行处理；如果插入成功说明没有消费过则执行消息的消费逻辑。</p>
+<p>​																																																																END…..</p>
 
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1525761478@qq.com </span>
