@@ -2,21 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>如何在大数据量用户系统中判断用户名是否重复 | 我的博客</title>
-  <meta name="keywords" content=" 如何在大数据量用户系统中判断用户名是否重复 ">
-  <meta name="description" content="如何在大数据量用户系统中判断用户名是否重复 | 我的博客">
+  <title>注册时用户名不可重复设计方案 | 我的博客</title>
+  <meta name="keywords" content=" 注册时用户名不可重复设计方案 ">
+  <meta name="description" content="注册时用户名不可重复设计方案 | 我的博客">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta name="description" content="如何在大数据量用户系统中判断用户名是否重复需求：现在有一个系统，用户量达到了10亿，每个用户都有自己的用户名user_name,系统在注册的时候要求，不能出现用户名重复的情况，请你设计一个方案。解：使用基数树的方案来进行设计10亿数据量，即便是使用布隆过滤器的话，可能使用的内存也是很大的。因为常见的用户名无非就是26个英文字母，三千多个常用汉字和少数允许的符号。所以对于这个数据量来说，使用 基数树">
+<meta name="description" content="注册时用户名不可重复设计方案很多系统要求在注册的时候可以自己输入用户名，但是要求注册的时候的用户名是不可以重复的，要想实现这样的一个需求，其实是没有银弹的，是要根据你们系统的用户量来决定的。1.如果对于政府项目这类数据量很小的系统来说  对于这类数据量很小的系统来说，一张表完全可以存放下所有的用户数据，而且直接去查询db也不会很慢，对于这种系统来说，那就可以直接查db了。 2.对于用户量稍微大一点">
 <meta property="og:type" content="article">
-<meta property="og:title" content="如何在大数据量用户系统中判断用户名是否重复">
-<meta property="og:url" content="http://eyedroplyq.github.io/2024/10/24/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%87%8F%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%88%A4%E6%96%AD%E7%94%A8%E6%88%B7%E5%90%8D%E6%98%AF%E5%90%A6%E9%87%8D%E5%A4%8D/index.html">
+<meta property="og:title" content="注册时用户名不可重复设计方案">
+<meta property="og:url" content="http://eyedroplyq.github.io/2024/10/24/%E6%B3%A8%E5%86%8C%E6%97%B6%E7%94%A8%E6%88%B7%E5%90%8D%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="我的博客">
-<meta property="og:description" content="如何在大数据量用户系统中判断用户名是否重复需求：现在有一个系统，用户量达到了10亿，每个用户都有自己的用户名user_name,系统在注册的时候要求，不能出现用户名重复的情况，请你设计一个方案。解：使用基数树的方案来进行设计10亿数据量，即便是使用布隆过滤器的话，可能使用的内存也是很大的。因为常见的用户名无非就是26个英文字母，三千多个常用汉字和少数允许的符号。所以对于这个数据量来说，使用 基数树">
+<meta property="og:description" content="注册时用户名不可重复设计方案很多系统要求在注册的时候可以自己输入用户名，但是要求注册的时候的用户名是不可以重复的，要想实现这样的一个需求，其实是没有银弹的，是要根据你们系统的用户量来决定的。1.如果对于政府项目这类数据量很小的系统来说  对于这类数据量很小的系统来说，一张表完全可以存放下所有的用户数据，而且直接去查询db也不会很慢，对于这种系统来说，那就可以直接查db了。 2.对于用户量稍微大一点">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-10-24T11:12:00.000Z">
-<meta property="article:modified_time" content="2024-10-24T11:13:43.827Z">
+<meta property="article:modified_time" content="2024-10-25T13:14:28.841Z">
 <meta property="article:author" content="Carl-LYQ">
-<meta property="article:tag" content="如何在大数据量用户系统中判断用户名是否重复">
+<meta property="article:tag" content="注册时用户名不可重复设计方案">
 <meta name="twitter:card" content="summary">
 
 
@@ -402,10 +402,6 @@
             </li>
         
             <li class="article-tag-list-item">
-                <i class="iconfont icon-tag"></i><a>如何在大数据量用户系统中判断用户名是否重复</a>
-            </li>
-        
-            <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>设计模式汇总</a>
             </li>
         
@@ -439,6 +435,10 @@
         
             <li class="article-tag-list-item">
                 <i class="iconfont icon-tag"></i><a>站内消息系统设计</a>
+            </li>
+        
+            <li class="article-tag-list-item">
+                <i class="iconfont icon-tag"></i><a>注册时用户名不可重复设计方案</a>
             </li>
         
             <li class="article-tag-list-item">
@@ -547,10 +547,10 @@
         
         
         <a  class="全部文章 系统设计 "
-           href="/2024/10/24/%E5%A6%82%E4%BD%95%E5%9C%A8%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%87%8F%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%88%A4%E6%96%AD%E7%94%A8%E6%88%B7%E5%90%8D%E6%98%AF%E5%90%A6%E9%87%8D%E5%A4%8D/"
-           data-tag="如何在大数据量用户系统中判断用户名是否重复"
+           href="/2024/10/24/%E6%B3%A8%E5%86%8C%E6%97%B6%E7%94%A8%E6%88%B7%E5%90%8D%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88/"
+           data-tag="注册时用户名不可重复设计方案"
            data-author="" >
-            <span class="post-title" title="如何在大数据量用户系统中判断用户名是否重复">如何在大数据量用户系统中判断用户名是否重复</span>
+            <span class="post-title" title="注册时用户名不可重复设计方案">注册时用户名不可重复设计方案</span>
             <span class="post-date" title="2024-10-24 19:12:00">2024/10/24</span>
         </a>
         
@@ -655,15 +655,6 @@
         
         
         <a  class="全部文章 面试题 "
-           href="/2023/12/01/Java%E5%B9%B6%E5%8F%91/"
-           data-tag="Java并发面试知识"
-           data-author="" >
-            <span class="post-title" title="Java并发面试知识">Java并发面试知识</span>
-            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
-        </a>
-        
-        
-        <a  class="全部文章 面试题 "
            href="/2023/12/01/Java%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E9%9D%A2%E8%AF%95%E9%A2%98/"
            data-tag="Java数据类型面试题"
            data-author="" >
@@ -673,10 +664,10 @@
         
         
         <a  class="全部文章 面试题 "
-           href="/2023/12/01/MySQL%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F%E9%97%AE%E9%A2%98/"
-           data-tag="MySQL的主从延迟问题"
+           href="/2023/12/01/Java%E5%B9%B6%E5%8F%91/"
+           data-tag="Java并发面试知识"
            data-author="" >
-            <span class="post-title" title="MySQL的主从延迟问题">MySQL的主从延迟问题</span>
+            <span class="post-title" title="Java并发面试知识">Java并发面试知识</span>
             <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
         </a>
         
@@ -686,6 +677,15 @@
            data-tag="Kafka"
            data-author="" >
             <span class="post-title" title="Kafka">Kafka</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
+           href="/2023/12/01/MySQL%E4%B8%BB%E4%BB%8E%E5%BB%B6%E8%BF%9F%E9%97%AE%E9%A2%98/"
+           data-tag="MySQL的主从延迟问题"
+           data-author="" >
+            <span class="post-title" title="MySQL的主从延迟问题">MySQL的主从延迟问题</span>
             <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
         </a>
         
@@ -717,20 +717,29 @@
         </a>
         
         
-        <a  class="全部文章 系统设计 "
-           href="/2023/12/01/RPC%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1/"
-           data-tag="RPC系统设计"
-           data-author="" >
-            <span class="post-title" title="RPC系统设计">RPC系统设计</span>
-            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
-        </a>
-        
-        
         <a  class="全部文章 网络通信 "
            href="/2023/12/01/RPC%E6%A1%86%E6%9E%B6/"
            data-tag="RPC框架"
            data-author="" >
             <span class="post-title" title="RPC框架">RPC框架</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 面试题 "
+           href="/2023/12/01/Spring%20%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/"
+           data-tag="Spring 如何解决循环依赖？"
+           data-author="" >
+            <span class="post-title" title="Spring 如何解决循环依赖？">Spring 如何解决循环依赖？</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 系统设计 "
+           href="/2023/12/01/RPC%E6%A1%86%E6%9E%B6%E7%9A%84%E8%AE%BE%E8%AE%A1/"
+           data-tag="RPC系统设计"
+           data-author="" >
+            <span class="post-title" title="RPC系统设计">RPC系统设计</span>
             <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
         </a>
         
@@ -762,15 +771,6 @@
         </a>
         
         
-        <a  class="全部文章 面试题 "
-           href="/2023/12/01/Spring%20%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%BE%AA%E7%8E%AF%E4%BE%9D%E8%B5%96/"
-           data-tag="Spring 如何解决循环依赖？"
-           data-author="" >
-            <span class="post-title" title="Spring 如何解决循环依赖？">Spring 如何解决循环依赖？</span>
-            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
-        </a>
-        
-        
         <a  class="全部文章 后端 "
            href="/2023/12/01/go%E6%96%B9%E6%B3%95%E4%B8%AD%E7%9A%84%E5%80%BC%E6%8E%A5%E6%94%B6%E8%80%85%E5%92%8C%E6%96%B9%E6%B3%95%E6%8E%A5%E6%94%B6%E8%80%85/"
            data-tag="go方法中的值接收者和方法接收者"
@@ -789,15 +789,6 @@
         </a>
         
         
-        <a  class="全部文章 分布式系统 "
-           href="/2023/12/01/zookeeper%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%EF%BC%88%E8%87%AA%E5%88%9B%EF%BC%89/"
-           data-tag="Zookeeper原理讲解"
-           data-author="" >
-            <span class="post-title" title="Zookeeper原理讲解">Zookeeper原理讲解</span>
-            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
-        </a>
-        
-        
         <a  class="全部文章 数据库 "
            href="/2023/12/01/mysql%E9%AB%98%E6%80%A7%E8%83%BD%E6%89%B9%E9%87%8F%E6%8F%92%E5%85%A5%E4%BC%98%E5%8C%96/"
            data-tag="mysql大数据量插入性能优化方案"
@@ -812,6 +803,15 @@
            data-tag="redis作为分布式锁中常见的问题"
            data-author="" >
             <span class="post-title" title="redis作为分布式锁中常见的问题">redis作为分布式锁中常见的问题</span>
+            <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
+        </a>
+        
+        
+        <a  class="全部文章 分布式系统 "
+           href="/2023/12/01/zookeeper%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0%EF%BC%88%E8%87%AA%E5%88%9B%EF%BC%89/"
+           data-tag="Zookeeper原理讲解"
+           data-author="" >
+            <span class="post-title" title="Zookeeper原理讲解">Zookeeper原理讲解</span>
             <span class="post-date" title="2023-12-01 16:44:48">2023/12/01</span>
         </a>
         
@@ -959,9 +959,9 @@
 </aside>
 <div id="post">
     <div class="pjax">
-        <article id="post-如何在大数据量用户系统中判断用户名是否重复" class="article article-type-post" itemscope itemprop="blogPost">
+        <article id="post-注册时用户名不可重复设计方案" class="article article-type-post" itemscope itemprop="blogPost">
     
-        <h1 class="article-title">如何在大数据量用户系统中判断用户名是否重复</h1>
+        <h1 class="article-title">注册时用户名不可重复设计方案</h1>
     
     <div class="article-meta">
         
@@ -979,14 +979,14 @@
         <span class="tag">
             <i class="iconfont icon-tag"></i>
             
-            <a class="color2">如何在大数据量用户系统中判断用户名是否重复</a>
+            <a class="color5">注册时用户名不可重复设计方案</a>
             
         </span>
         
     </div>
     <div class="article-meta">
         
-            发布时间 : <time class="date" title='最后更新: 2024-10-24 19:13:43'>2024-10-24 19:12</time>
+            发布时间 : <time class="date" title='最后更新: 2024-10-25 21:14:28'>2024-10-24 19:12</time>
         
     </div>
     <div class="article-meta">
@@ -1008,7 +1008,7 @@
     
     <div class="toc-ref">
     
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%9C%A8%E5%A4%A7%E6%95%B0%E6%8D%AE%E9%87%8F%E7%94%A8%E6%88%B7%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%88%A4%E6%96%AD%E7%94%A8%E6%88%B7%E5%90%8D%E6%98%AF%E5%90%A6%E9%87%8D%E5%A4%8D"><span class="toc-text">如何在大数据量用户系统中判断用户名是否重复</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9C%80%E6%B1%82%EF%BC%9A%E7%8E%B0%E5%9C%A8%E6%9C%89%E4%B8%80%E4%B8%AA%E7%B3%BB%E7%BB%9F%EF%BC%8C%E7%94%A8%E6%88%B7%E9%87%8F%E8%BE%BE%E5%88%B0%E4%BA%8610%E4%BA%BF%EF%BC%8C%E6%AF%8F%E4%B8%AA%E7%94%A8%E6%88%B7%E9%83%BD%E6%9C%89%E8%87%AA%E5%B7%B1%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8Duser-name-%E7%B3%BB%E7%BB%9F%E5%9C%A8%E6%B3%A8%E5%86%8C%E7%9A%84%E6%97%B6%E5%80%99%E8%A6%81%E6%B1%82%EF%BC%8C%E4%B8%8D%E8%83%BD%E5%87%BA%E7%8E%B0%E7%94%A8%E6%88%B7%E5%90%8D%E9%87%8D%E5%A4%8D%E7%9A%84%E6%83%85%E5%86%B5%EF%BC%8C%E8%AF%B7%E4%BD%A0%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA%E6%96%B9%E6%A1%88%E3%80%82"><span class="toc-text">需求：现在有一个系统，用户量达到了10亿，每个用户都有自己的用户名user_name,系统在注册的时候要求，不能出现用户名重复的情况，请你设计一个方案。</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%EF%BC%9A%E4%BD%BF%E7%94%A8%E5%9F%BA%E6%95%B0%E6%A0%91%E7%9A%84%E6%96%B9%E6%A1%88%E6%9D%A5%E8%BF%9B%E8%A1%8C%E8%AE%BE%E8%AE%A1"><span class="toc-text">解：使用基数树的方案来进行设计</span></a></li></ol></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E5%86%8C%E6%97%B6%E7%94%A8%E6%88%B7%E5%90%8D%E4%B8%8D%E5%8F%AF%E9%87%8D%E5%A4%8D%E8%AE%BE%E8%AE%A1%E6%96%B9%E6%A1%88"><span class="toc-text">注册时用户名不可重复设计方案</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BE%88%E5%A4%9A%E7%B3%BB%E7%BB%9F%E8%A6%81%E6%B1%82%E5%9C%A8%E6%B3%A8%E5%86%8C%E7%9A%84%E6%97%B6%E5%80%99%E5%8F%AF%E4%BB%A5%E8%87%AA%E5%B7%B1%E8%BE%93%E5%85%A5%E7%94%A8%E6%88%B7%E5%90%8D%EF%BC%8C%E4%BD%86%E6%98%AF%E8%A6%81%E6%B1%82%E6%B3%A8%E5%86%8C%E7%9A%84%E6%97%B6%E5%80%99%E7%9A%84%E7%94%A8%E6%88%B7%E5%90%8D%E6%98%AF%E4%B8%8D%E5%8F%AF%E4%BB%A5%E9%87%8D%E5%A4%8D%E7%9A%84%EF%BC%8C%E8%A6%81%E6%83%B3%E5%AE%9E%E7%8E%B0%E8%BF%99%E6%A0%B7%E7%9A%84%E4%B8%80%E4%B8%AA%E9%9C%80%E6%B1%82%EF%BC%8C%E5%85%B6%E5%AE%9E%E6%98%AF%E6%B2%A1%E6%9C%89%E9%93%B6%E5%BC%B9%E7%9A%84%EF%BC%8C%E6%98%AF%E8%A6%81%E6%A0%B9%E6%8D%AE%E4%BD%A0%E4%BB%AC%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%94%A8%E6%88%B7%E9%87%8F%E6%9D%A5%E5%86%B3%E5%AE%9A%E7%9A%84%E3%80%82"><span class="toc-text">很多系统要求在注册的时候可以自己输入用户名，但是要求注册的时候的用户名是不可以重复的，要想实现这样的一个需求，其实是没有银弹的，是要根据你们系统的用户量来决定的。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%A6%82%E6%9E%9C%E5%AF%B9%E4%BA%8E%E6%94%BF%E5%BA%9C%E9%A1%B9%E7%9B%AE%E8%BF%99%E7%B1%BB%E6%95%B0%E6%8D%AE%E9%87%8F%E5%BE%88%E5%B0%8F%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9D%A5%E8%AF%B4"><span class="toc-text">1.如果对于政府项目这类数据量很小的系统来说</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AF%B9%E4%BA%8E%E7%94%A8%E6%88%B7%E9%87%8F%E7%A8%8D%E5%BE%AE%E5%A4%A7%E4%B8%80%E7%82%B9%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9D%A5%E8%AF%B4"><span class="toc-text">2.对于用户量稍微大一点的系统来说</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AF%B9%E4%BA%8E%E5%A4%A7%E5%8E%82%E8%BF%99%E7%A7%8D%E6%95%B0%E6%8D%AE%E9%87%8F%E9%9D%9E%E5%B8%B8%E5%A4%A7%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9D%A5%E8%AF%B4"><span class="toc-text">3.对于大厂这种数据量非常大的系统来说</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">总结：</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8E%E6%95%B0%E6%8D%AE%E9%87%8F%E5%B0%8F%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9D%A5%E8%AF%B4%EF%BC%8C%E7%9B%B4%E6%8E%A5%E5%AD%98%E5%9C%A8db%E4%B8%AD%EF%BC%8C%E7%84%B6%E5%90%8E%E6%B3%A8%E5%86%8C%E7%9A%84%E6%97%B6%E5%80%99%E5%8E%BB%E6%9F%A5%E8%AF%A2db%E6%9D%A5%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C%E3%80%82"><span class="toc-text">对于数据量小的系统来说，直接存在db中，然后注册的时候去查询db来判断是否重复注册。</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8E%E6%95%B0%E6%8D%AE%E9%87%8F%E4%B8%AD%E7%AD%89%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9D%A5%E8%AF%B4%EF%BC%8C%E5%8F%AF%E4%BB%A5%E5%B0%86%E7%94%A8%E6%88%B7%E5%90%8D%E6%94%BE%E5%9C%A8redis%E6%88%96%E8%80%85%E5%B8%83%E9%9A%86%E8%BF%87%E6%BB%A4%E5%99%A8%E4%B8%AD%EF%BC%8C%E7%84%B6%E5%90%8E%E5%86%8D%E7%BB%93%E5%90%88%E4%BD%BF%E7%94%A8db%E6%9D%A5%E8%BF%9B%E8%A1%8C%E5%88%A4%E6%96%AD%E6%98%AF%E5%90%A6%E9%87%8D%E5%A4%8D%E6%B3%A8%E5%86%8C"><span class="toc-text">对于数据量中等的系统来说，可以将用户名放在redis或者布隆过滤器中，然后再结合使用db来进行判断是否重复注册</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E4%BA%8E%E6%95%B0%E6%8D%AE%E9%87%8F%E9%9D%9E%E5%B8%B8%E5%A4%A7%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%9D%A5%E8%AF%B4%EF%BC%8C%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8ES%E5%88%86%E7%89%87%E9%9B%86%E7%BE%A4-db%E5%88%86%E5%BA%93%E5%88%86%E8%A1%A8%E7%9A%84%E6%96%B9%E6%A1%88%E6%9D%A5%E5%AE%9E%E7%8E%B0"><span class="toc-text">对于数据量非常大的系统来说，可以使用ES分片集群+db分库分表的方案来实现</span></a></li></ol></li></ol></li></ol>
     
 <style>
     .left-col .switch-btn,
@@ -1024,20 +1024,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="如何在大数据量用户系统中判断用户名是否重复"><a href="#如何在大数据量用户系统中判断用户名是否重复" class="headerlink" title="如何在大数据量用户系统中判断用户名是否重复"></a>如何在大数据量用户系统中判断用户名是否重复</h2><h3 id="需求：现在有一个系统，用户量达到了10亿，每个用户都有自己的用户名user-name-系统在注册的时候要求，不能出现用户名重复的情况，请你设计一个方案。"><a href="#需求：现在有一个系统，用户量达到了10亿，每个用户都有自己的用户名user-name-系统在注册的时候要求，不能出现用户名重复的情况，请你设计一个方案。" class="headerlink" title="需求：现在有一个系统，用户量达到了10亿，每个用户都有自己的用户名user_name,系统在注册的时候要求，不能出现用户名重复的情况，请你设计一个方案。"></a>需求：现在有一个系统，用户量达到了10亿，每个用户都有自己的用户名user_name,系统在注册的时候要求，不能出现用户名重复的情况，请你设计一个方案。</h3><h4 id="解：使用基数树的方案来进行设计"><a href="#解：使用基数树的方案来进行设计" class="headerlink" title="解：使用基数树的方案来进行设计"></a>解：使用基数树的方案来进行设计</h4><p>10亿数据量，即便是使用布隆过滤器的话，可能使用的内存也是很大的。因为常见的用户名无非就是26个英文字母，三千多个常用汉字和少数允许的符号。所以对于这个数据量来说，使用 <strong>基数树</strong>是比较节省内存的。</p>
-<p>基数树可以使用一个特殊字符作为树的根节点，然后往下构造它的子节点，子节点再往下构造自己的子节点，我们只需要根据已经存在的用户名来找到这个用户名对应的最下层的节点，然后将这个节点是否使用的标记打为true,就可以用来表示我们的这个用户名是否被使用。对于删除一个用户名来说可能就比较复杂，我们要从最下层节点往上找，如果上面的某个节点有其他的用户名使用，那么这个节点对应的使用标记不能设置为false,如果没有其他用户名使用的话是可以标记为false的。</p>
-<p>下面就来写一些基数树的实现代码</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">RadixNode</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="type">char</span> label;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> isEndOfWord;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;Character, RadixNode&gt; children;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">RadixNode</span><span class="params">(<span class="type">char</span> label)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.label  = label;</span><br><span class="line">        <span class="built_in">this</span>.isEndOfWord  = <span class="literal">false</span>;</span><br><span class="line">        <span class="built_in">this</span>.children  = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="type">char</span> <span class="title function_">getLabel</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> label;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isEndOfWord</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> isEndOfWord;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setEndOfWord</span><span class="params">(<span class="type">boolean</span> endOfWord)</span> &#123;</span><br><span class="line">        isEndOfWord = endOfWord;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> Map&lt;Character, RadixNode&gt; <span class="title function_">getChildren</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> children;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RadixTree</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> RadixNode root;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">RadixTree</span><span class="params">()</span> &#123;</span><br><span class="line">        root = <span class="keyword">new</span> <span class="title class_">RadixNode</span>(<span class="string">&#x27;\0&#x27;</span>); <span class="comment">// 使用一个特殊字符作为根节点标签</span></span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 插入一个用户名到基数树中。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> username 用户名</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">insert</span><span class="params">(String username)</span> &#123;</span><br><span class="line">        <span class="type">RadixNode</span> <span class="variable">current</span> <span class="operator">=</span> root;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span> c : username.toCharArray())  &#123;</span><br><span class="line">            <span class="type">RadixNode</span> <span class="variable">child</span> <span class="operator">=</span> current.getChildren().get(c); </span><br><span class="line">            <span class="keyword">if</span> (child == <span class="literal">null</span>) &#123;</span><br><span class="line">                child = <span class="keyword">new</span> <span class="title class_">RadixNode</span>(c);</span><br><span class="line">                current.getChildren().put(c,  child);</span><br><span class="line">            &#125;</span><br><span class="line">            current = child;</span><br><span class="line">        &#125;</span><br><span class="line">        current.setEndOfWord(<span class="literal">true</span>);  <span class="comment">// 标记为单词结尾</span></span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 判断用户名是否存在于基数树中。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> username 用户名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 如果用户名存在返回 true，否则返回 false</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">search</span><span class="params">(String username)</span> &#123;</span><br><span class="line">        <span class="type">RadixNode</span> <span class="variable">current</span> <span class="operator">=</span> root;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">char</span> c : username.toCharArray())  &#123;</span><br><span class="line">            <span class="type">RadixNode</span> <span class="variable">child</span> <span class="operator">=</span> current.getChildren().get(c); </span><br><span class="line">            <span class="keyword">if</span> (child == <span class="literal">null</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 字符不存在</span></span><br><span class="line">            &#125;</span><br><span class="line">            current = child;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> current.isEndOfWord();  <span class="comment">// 检查是否为单词结尾</span></span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 从基数树中删除一个用户名。</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> username 用户名</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> 如果删除成功返回 true，否则返回 false</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">delete</span><span class="params">(String username)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> deleteRecursive(root, username, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">private</span> <span class="type">boolean</span> <span class="title function_">deleteRecursive</span><span class="params">(RadixNode node, String username, <span class="type">int</span> index)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (index == username.length())  &#123;</span><br><span class="line">            <span class="comment">// 如果是单词结尾，取消标记</span></span><br><span class="line">            <span class="keyword">if</span> (!node.isEndOfWord())  &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            node.setEndOfWord(<span class="literal">false</span>); </span><br><span class="line">            <span class="comment">// 如果没有其他子节点，删除该节点</span></span><br><span class="line">            <span class="keyword">if</span> (node.getChildren().isEmpty())  &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="type">char</span> <span class="variable">c</span> <span class="operator">=</span> username.charAt(index); </span><br><span class="line">        <span class="type">RadixNode</span> <span class="variable">child</span> <span class="operator">=</span> node.getChildren().get(c); </span><br><span class="line">        <span class="keyword">if</span> (child == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// 未找到</span></span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="type">boolean</span> <span class="variable">shouldDeleteCurrentNode</span> <span class="operator">=</span> deleteRecursive(child, username, index + <span class="number">1</span>);</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> (shouldDeleteCurrentNode) &#123;</span><br><span class="line">            node.getChildren().remove(c); </span><br><span class="line">            <span class="comment">// 如果当前节点没有任何子节点，并且不是单词结尾，则删除当前节点</span></span><br><span class="line">            <span class="keyword">if</span> (node.getChildren().isEmpty()  &amp;&amp; !node.isEndOfWord())  &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Main</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">RadixTree</span> <span class="variable">tree</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RadixTree</span>();</span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 插入用户名 </span></span><br><span class="line">        tree.insert(<span class="string">&quot;john&quot;</span>); </span><br><span class="line">        tree.insert(<span class="string">&quot;doe&quot;</span>); </span><br><span class="line">        tree.insert(<span class="string">&quot;johndoe&quot;</span>); </span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 查找用户名</span></span><br><span class="line">        System.out.println(tree.search(<span class="string">&quot;john&quot;</span>));  <span class="comment">// 输出 true</span></span><br><span class="line">        System.out.println(tree.search(<span class="string">&quot;doe&quot;</span>));  <span class="comment">// 输出 true</span></span><br><span class="line">        System.out.println(tree.search(<span class="string">&quot;johndoe&quot;</span>));  <span class="comment">// 输出 true</span></span><br><span class="line">        System.out.println(tree.search(<span class="string">&quot;jane&quot;</span>));  <span class="comment">// 输出 false</span></span><br><span class="line"> </span><br><span class="line">        <span class="comment">// 删除用户名</span></span><br><span class="line">        System.out.println(tree.delete(<span class="string">&quot;johndoe&quot;</span>));  <span class="comment">// 输出 true</span></span><br><span class="line">        System.out.println(tree.search(<span class="string">&quot;johndoe&quot;</span>));  <span class="comment">// 输出 false</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
+        <h2 id="注册时用户名不可重复设计方案"><a href="#注册时用户名不可重复设计方案" class="headerlink" title="注册时用户名不可重复设计方案"></a>注册时用户名不可重复设计方案</h2><h4 id="很多系统要求在注册的时候可以自己输入用户名，但是要求注册的时候的用户名是不可以重复的，要想实现这样的一个需求，其实是没有银弹的，是要根据你们系统的用户量来决定的。"><a href="#很多系统要求在注册的时候可以自己输入用户名，但是要求注册的时候的用户名是不可以重复的，要想实现这样的一个需求，其实是没有银弹的，是要根据你们系统的用户量来决定的。" class="headerlink" title="很多系统要求在注册的时候可以自己输入用户名，但是要求注册的时候的用户名是不可以重复的，要想实现这样的一个需求，其实是没有银弹的，是要根据你们系统的用户量来决定的。"></a>很多系统要求在注册的时候可以自己输入用户名，但是要求注册的时候的用户名是不可以重复的，要想实现这样的一个需求，其实是没有银弹的，是要根据你们系统的用户量来决定的。</h4><h4 id="1-如果对于政府项目这类数据量很小的系统来说"><a href="#1-如果对于政府项目这类数据量很小的系统来说" class="headerlink" title="1.如果对于政府项目这类数据量很小的系统来说"></a>1.如果对于政府项目这类数据量很小的系统来说</h4><p>  对于这类<strong>数据量很小</strong>的系统来说，一张表完全可以存放下所有的用户数据，而且直接去查询db也不会很慢，对于这种系统来说，那就可以<strong>直接查db</strong>了。</p>
+<h4 id="2-对于用户量稍微大一点的系统来说"><a href="#2-对于用户量稍微大一点的系统来说" class="headerlink" title="2.对于用户量稍微大一点的系统来说"></a>2.对于用户量稍微大一点的系统来说</h4><p>  对于这类系统来说，应该是符合大部分企业的情况的，数据量没有那么小，但是又没有大厂那么大，对于这类系统来说，其实可以将数据放在<strong>redis</strong>中或者是使用一下<strong>布隆过滤器</strong>，注册的时候就可以判断这个数据是否存在了，而且数据量不太大的情况下定期重构布隆过滤器的时间开销其实也是可以接受的。对于使用布隆过滤器这种场景，有概率会发生误判，所以布隆过滤器的使用也是需要配合db来进行兜底的。</p>
+<h4 id="3-对于大厂这种数据量非常大的系统来说"><a href="#3-对于大厂这种数据量非常大的系统来说" class="headerlink" title="3.对于大厂这种数据量非常大的系统来说"></a>3.对于大厂这种数据量非常大的系统来说</h4><p>  对于大厂这种<strong>数据量很大</strong>的系统来说，比如数据表里面已经有了1亿条用户数据了，这种级别的数据量肯定是需要进行<strong>水平分库、水平分表</strong>的。然后对于这类场景的设计来说，可以使用<strong>ES分片的策略存储用户名</strong>来进行。</p>
+<p>  在一个系统中，用户名的长度肯定是固定的，比如最大长度不能超过16个字符，最小长度不能少于1个字符，所以最多会有16^16个用户名，这个数据量是非常大的，完全能够满足使用。<br>  每个用户名肯定有一个<strong>唯一的ASCII</strong>码值，所以我们可以<strong>针对ASCII的大小进行范围分片构造ES分片</strong>。然后我们在每个ES分片中存储已经注册的用户名，当我们用户在进行注册的时候，先根据ASCII值的大小就能够确定ES的分片，然后去ES中查询是否存在这个用户名，如果没有的话，说明没有被重复注册，如果有的话，说明已经被注册过了，则无法进行注册。而且ES中删除一个用户名是很快的，查询也是很快的。<br>  另外针对<strong>并发注册</strong>同一个用户名的并发问题，推荐使用<strong>分布式锁</strong>来实现，因为说实话对于注册或者改名这个接口来说QPS其实是没有那么大的，使用分布式锁我认为是可以接受的。</p>
+<h3 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h3><h4 id="对于数据量小的系统来说，直接存在db中，然后注册的时候去查询db来判断是否重复注册。"><a href="#对于数据量小的系统来说，直接存在db中，然后注册的时候去查询db来判断是否重复注册。" class="headerlink" title="对于数据量小的系统来说，直接存在db中，然后注册的时候去查询db来判断是否重复注册。"></a>对于数据量小的系统来说，直接存在db中，然后注册的时候去查询db来判断是否重复注册。</h4><h4 id="对于数据量中等的系统来说，可以将用户名放在redis或者布隆过滤器中，然后再结合使用db来进行判断是否重复注册"><a href="#对于数据量中等的系统来说，可以将用户名放在redis或者布隆过滤器中，然后再结合使用db来进行判断是否重复注册" class="headerlink" title="对于数据量中等的系统来说，可以将用户名放在redis或者布隆过滤器中，然后再结合使用db来进行判断是否重复注册"></a>对于数据量中等的系统来说，可以将用户名放在redis或者布隆过滤器中，然后再结合使用db来进行判断是否重复注册</h4><h4 id="对于数据量非常大的系统来说，可以使用ES分片集群-db分库分表的方案来实现"><a href="#对于数据量非常大的系统来说，可以使用ES分片集群-db分库分表的方案来实现" class="headerlink" title="对于数据量非常大的系统来说，可以使用ES分片集群+db分库分表的方案来实现"></a>对于数据量非常大的系统来说，可以使用ES分片集群+db分库分表的方案来实现</h4>
       
        <hr><span style="font-style: italic;color: gray;"> 转载请注明来源，欢迎对文章中的引用来源进行考证，欢迎指出任何有错误或不够清晰的表达。可以在下面评论区评论，也可以邮件至 1525761478@qq.com </span>
     </div>
