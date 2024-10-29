@@ -847,7 +847,7 @@
 <p>​	3.我们系统会拿着用户的授权信息去微信的<strong>授权服务器</strong>去申请授权，微信认证通过了，会给我们系统返回一个<strong>token</strong></p>
 <p>​	4.我们系统再拿着这个token去微信的<strong>资源服务器</strong>，申请获取这个用户的信息</p>
 <p>​	5.微信的资源服务器对这个<strong>token进行认证</strong>，认证通过后会<strong>把用户的信息给我们系统</strong></p>
-<p><img src="https://cdn.jsdelivr.net/gh/EyeDroplyq/myblog-img@master/wx-OAuth.jpg"></p>
+<p><img src="https://pic.imgdb.cn/item/6720eec8d29ded1a8c68123a.webp"></p>
 <h4 id="119、什么是JWT？使用JWT有什么优缺点？"><a href="#119、什么是JWT？使用JWT有什么优缺点？" class="headerlink" title="119、什么是JWT？使用JWT有什么优缺点？"></a>119、什么是JWT？使用JWT有什么优缺点？</h4><p>​	JWT其实就是一个<strong>JSON格式的字符串</strong>，用来进行<strong>认证授权</strong>。其中JWT由三部分组成：<strong>Header</strong>、<strong>Payload</strong>、<strong>Signature</strong></p>
 <p>​	其中Header里面主要保存使用的<strong>加密算法</strong>、<strong>token类型</strong>。对结果<strong>使用Base64加密后保存</strong></p>
 <p>​	<strong>Payload</strong>里面包含各种声明信息，对结果使用<strong>Base64加密</strong>后保存</p>
