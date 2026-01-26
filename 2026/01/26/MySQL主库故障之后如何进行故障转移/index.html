@@ -7,7 +7,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://s3.bmp.ovh/2026/01/26/nJshqHa6.png">
 <meta property="article:published_time" content="2026-01-26T12:48:48.000Z">
-<meta property="article:modified_time" content="2026-01-26T12:50:20.243Z">
+<meta property="article:modified_time" content="2026-01-26T12:55:07.357Z">
 <meta property="article:author" content="Carl">
 <meta property="article:tag" content="Mysql故障转移">
 <meta name="twitter:card" content="summary">
@@ -147,26 +147,26 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2026-01-26 20:50:20'
-}</script></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/carl-first.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">62</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s3.bmp.ovh/2026/01/26/nJshqHa6.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Carl的乌托邦</span></a><a class="nav-page-title" href="/"><span class="site-name">MySQL主库故障之后如何进行故障转移</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">MySQL主库故障之后如何进行故障转移</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-26T12:48:48.000Z" title="发表于 2026-01-26 20:48:48">2026-01-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-26T12:50:20.243Z" title="更新于 2026-01-26 20:50:20">2026-01-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9C%BA%E6%99%AF%E8%AE%BE%E8%AE%A1/">场景设计</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="MySQL主库故障之后如何进行故障转移"><a href="#MySQL主库故障之后如何进行故障转移" class="headerlink" title="MySQL主库故障之后如何进行故障转移"></a>MySQL主库故障之后如何进行故障转移</h2><p>首先这个问题要从大方向来说要从三个方向来看，<strong>①故障检测②故障转移③数据一致性检测与同步</strong></p>
+  postUpdate: '2026-01-26 20:55:07'
+}</script></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/carl-first.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">63</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">62</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://s3.bmp.ovh/2026/01/26/nJshqHa6.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><span class="site-name">Carl的乌托邦</span></a><a class="nav-page-title" href="/"><span class="site-name">MySQL主库故障之后如何进行故障转移</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">MySQL主库故障之后如何进行故障转移</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2026-01-26T12:48:48.000Z" title="发表于 2026-01-26 20:48:48">2026-01-26</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2026-01-26T12:55:07.357Z" title="更新于 2026-01-26 20:55:07">2026-01-26</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%9C%BA%E6%99%AF%E8%AE%BE%E8%AE%A1/">场景设计</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="MySQL主库故障之后如何进行故障转移"><a href="#MySQL主库故障之后如何进行故障转移" class="headerlink" title="MySQL主库故障之后如何进行故障转移"></a>MySQL主库故障之后如何进行故障转移</h2><p>首先这个问题要从大方向来说要从三个方向来看，<strong>①故障检测②故障转移③数据一致性检测与同步</strong></p>
 <p>当然大家肯定能猜到，目前市面上肯定是有比较优秀的开源工具的（后面会说），是不需要我们手动去造轮子的。但是面试官问你这个问题的时候肯定是想靠你的思路，也就是问你这些开源工具的实现思路是什么，那么你就需要能够给面试官说出来你的设计思路。</p>
 <hr>
 <h4 id="故障检测"><a href="#故障检测" class="headerlink" title="故障检测"></a>故障检测</h4><p>首先我们肯定要设计一种比较可靠的检测机制，能够<strong>即时且准确</strong>的发现Master故障了，既不能够误判也不能够漏判。</p>
 <p><strong>阶段1: 基础心跳检测</strong><br>以一定的时间间隔对Master发起心跳检测，比如以3s作为时间间隔发送心跳</p>
 <pre><code>1. **尝试与Master的3306端口建立TCP连接**
- 2. 如果成功与Master建立了TCP连接，那么可以去**发送轻量级的查询**，比如Select 1 from table;
- 3. **尝试与Master建立SSH连接，去登录Master**
- 4. **同时监控Master机器的CPU利用率、内存利用率、磁盘IO等，这个可以帮助我们更好的判断Master是否真的出现故障**
+2. 如果成功与Master建立了TCP连接，那么可以去**发送轻量级的查询**，比如Select 1 from table;
+3. **尝试与Master建立SSH连接，去登录Master**
+4. **同时监控Master机器的CPU利用率、内存利用率、磁盘IO等，这个可以帮助我们更好的判断Master是否真的出现故障**
 </code></pre>
-<p>::: tip</p>
+<blockquote>
 <p>如果在阶段1的<strong>任何一个环节成功了</strong>，那么就认为Master是没有故障的</p>
-<p>:::</p>
+</blockquote>
 <p><strong>阶段2：故障怀疑</strong></p>
 <p>如果我们阶段1的三个环节都失败了，那么可以调整时间间隔，由原来的3s变为1s,如果在重复阶段1的过程中有一步成功了，那么依然不认为Master故障，可能是因为网络抖动引起。如果在经历了N次重试之后，阶段1的三步都没有成功，那么可以进行阶段2了。</p>
 <p>与所有的Slave建立SSH连接，在Slave上执行<code>SHOW SLAVE STATUS</code>,判断一下Slave是否能够成功与Master建立连接以及是否能够拉取到Binlog日志，如果所有的Slave都与Master连接超时，并且都没有获取到Binlog日志，那么就认为Master发生故障了。</p>
-<p>::: tip</p>
+<blockquote>
 <p>补充一下：我们要借鉴Redis Sentinel的思路，我们的这个检测以及进行故障转移的”Sentinel节点“，也要部署多个，防止发生”主观下线“的问题。</p>
-<p>:::</p>
+</blockquote>
 <hr>
 <h4 id="故障转移"><a href="#故障转移" class="headerlink" title="故障转移"></a>故障转移</h4><p>在经过前面的故障检测之后，我们可以认为Master发生故障了，那么接下来就是进行故障转移，从Slave中选择一个来作为新的Master。</p>
 <p>另外进行故障转移的时候可以分为两类。第一类：<strong>人工处理</strong>。第二类：<strong>自动转移</strong>。</p>
@@ -177,9 +177,9 @@
 <li><strong>可以在Slave中选择Binlog同步程度最高的Slave来作为新的Master</strong></li>
 </ol>
 <p>但是此时可能还面临一个问题，<strong>脑裂</strong>问题。</p>
-<p>::: tip</p>
+<blockquote>
 <p>脑裂问题：因为网络原因导致Master和Slave之间发生了网络分区，Slave服务连接到Master但是此时的Master没有宕机，此时认为Master宕机了，选择了一个新的Master，导致MySQL集群中出现了两个Master的情况。</p>
-<p>:::</p>
+</blockquote>
 <p>我们还需要设计脑裂问题的防御手段</p>
 <ol>
 <li><strong>设计”Sentinel集群“，可以有效的降低风险</strong></li>
